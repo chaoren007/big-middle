@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.pay.dao.ScanPayDAO">
+        
+	<resultMap id="ScanPayPO" type="com.morning.star.retail.pay.entity.ScanPayPO">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="pay_channel" jdbcType="INTEGER" property="payChannel" />
+        <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
+        <result column="merchant_code" jdbcType="VARCHAR" property="merchantCode"/>
+        <result column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
+        <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+        <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+        <result column="auth_code" jdbcType="VARCHAR" property="authCode" />
+        <result column="subject" jdbcType="VARCHAR" property="subject" />
+        <result column="terminal_id" jdbcType="VARCHAR" property="terminalId" />
+        <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+        <result column="pay_timeout" jdbcType="VARCHAR" property="payTimeout" />
+        <result column="device_ip" jdbcType="VARCHAR" property="deviceIp" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="status_desc" jdbcType="VARCHAR" property="desc" />
+    </resultMap>
+    
+	<sql id="ScanPayPOWithoutId">
+        pay_channel, owner_id,merchant_code, out_trade_no, order_code, trade_no, auth_code, 
+        subject, terminal_id, total_amount, pay_timeout, 
+        device_ip, create_time, modify_time, status, status_desc
+    </sql>
+    
+	<insert id="save" parameterType="com.morning.star.retail.pay.entity.ScanPayPO" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO retail_scan_pay 
+		  (<include refid="ScanPayPOWithoutId" />) 
+		VALUES (
+		  #{payChannel},#{ownerId},#{merchantCode},#{outTradeNo},#{orderCode},#{tradeNo},#{authCode},
+		  #{subject},#{terminalId},#{totalAmount},#{payTimeout},
+		  #{deviceIp},#{createTime},#{modifyTime},#{status},#{desc}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.morning.star.retail.pay.entity.ScanPayPO">
+	   UPDATE retail_scan_pay SET
+            pay_channel=#{payChannel},owner_id=#{ownerId},merchant_code=#{merchantCode},order_code=#{orderCode},out_trade_no=#{outTradeNo},trade_no=#{tradeNo},auth_code=#{authCode},
+            subject=#{subject},terminal_id=#{terminalId},total_amount=#{totalAmount},pay_timeout=#{payTimeout},
+            device_ip=#{deviceIp},create_time=#{createTime},modify_time=#{modifyTime},status=#{status},status_desc=#{desc}
+        WHERE id=#{id}
+	</update>
+	
+	<select id="get" resultMap="ScanPayPO">
+        SELECT
+            id, <include refid="ScanPayPOWithoutId" />
+        FROM retail_scan_pay
+        WHERE out_trade_no = #{outTradeNo}
+    </select>
+    
+</mapper>

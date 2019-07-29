@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.stock.dao.PurchaseInOrderDAO">
+
+    <sql id="baseSql">
+		purchase_code,receipt_code,
+		group_code,group_name,
+		store_code,store_name,
+		city_id, city_name,
+		warehouse_city_id,warehouse_city_name,warehouse_code,warehouse_name,
+		supplier_code,supplier_name,
+		status,trans_status,payments,amount,rate_amount,contract,remark,
+		approve_id,approve_name,approve_date,submit_type,pre_receipt_date,
+		create_time,modify_time,
+		creator_id,creator_name,
+		operator_id,operator_name
+	</sql>
+
+    <select id="queryPage" parameterType="com.morning.star.retail.facade.dto.purchasein.PurchaseInQueryDTO"
+            resultType="com.morning.star.retail.facade.dto.purchasein.PurchaseInOrderSimpleDTO">
+        select purchase_in_code,purchase_code,status,trans_status,submit_type,
+        supplier_code,supplier_name,
+        amount,rate_amount,
+        create_time,pre_receipt_date,city_id, city_name,
+        warehouse_city_id,warehouse_city_name,warehouse_code,warehouse_name,
+        IFNULL(modify_time,create_time) as modifyTime,creator_id,creator_name,operator_id,operator_name
+        from retail_purchase_in
+        where delete_flag = 0
+        <if test="groupCode != null and groupCode != ''">
+            AND group_code = #{groupCode}
+        </if>
+        <if test="storeCode != null and storeCode != ''">
+            and store_code = #{storeCode}
+        </if>
+        <if test="cityId != null and cityId != ''">
+            and city_id = #{cityId}
+        </if>
+        <if test="warehouseCityId != null and warehouseCityId != ''">
+            and warehouse_city_id = #{warehouseCityId}
+        </if>
+        <if test="purchaseInCode != null and purchaseInCode != ''">
+            and purchase_in_code like '%${purchaseInCode}%'
+        </if>
+        <if test="purchaseCode != null and purchaseCode != ''">
+            and purchase_code like '%${purchaseCode}%'
+        </if>
+        <if test="creator != null and creator != ''">
+            and (creator_id=#{creator} or creator_name like '%${creator}%' )
+        </if>
+        <if test="supplierCode != null and supplierCode != ''">
+            and supplier_code=#{supplierCode}
+        </if>
+        <if test="supplierName != null and supplierName !=''">
+            AND supplier_name like '%${supplierName}%'
+        </if>
+        <if test="warehouseCode != null and warehouseCode !=''">
+            AND warehouse_code like '%${warehouseCode}%'
+        </if>
+        <if test="warehouseName != null and warehouseName != ''">
+            and warehouse_code=#{warehouseName}
+        </if>
+        <if test="status!=null and status !=''">
+            and status=#{status}
+        </if>
+        <if test="submitType!=null and submitType !=''">
+            and submit_type=#{submitType}
+        </if>
+        <if test="beginTime != null">
+            AND create_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime != null">
+            AND create_time &lt;= #{endTime}
+        </if>
+        <if test="preReceiptBeginTime != null">
+            AND pre_receipt_date &gt;= #{preReceiptBeginTime}
+        </if>
+        <if test="preReceiptEndTime != null">
+            AND pre_receipt_date &lt;= #{preReceiptEndTime}
+        </if>
+        order by create_time desc
+
+    </select>
+</mapper>

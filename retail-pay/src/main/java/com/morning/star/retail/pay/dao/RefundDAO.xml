@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.pay.dao.RefundDAO">
+        
+	<resultMap id="result" type="com.morning.star.retail.pay.entity.ScanRefund">
+        <id column="id" jdbcType="INTEGER" property="id" />
+       	<result column="code" jdbcType="VARCHAR" property="code"/>
+       	<result column="transaction_id" jdbcType="VARCHAR" property="transactionId"/>
+       	<result column="merchant_code" jdbcType="VARCHAR" property="merchantCode"/>
+       	<result column="order_code" jdbcType="VARCHAR" property="orderCode"/>
+       	<result column="pay_bill_code" jdbcType="VARCHAR" property="payBillCode"/>
+       	<result column="refund_amount" jdbcType="DECIMAL" property="refundAmount"/>
+       	<result column="refund_channel" jdbcType="INTEGER" property="refundChannel"/>
+       	<result column="status" jdbcType="VARCHAR" property="status"/>
+       	<result column="type" jdbcType="VARCHAR" property="type"/>
+       	<result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    </resultMap>
+    
+	<sql id="WITHOUTID">
+        code, transaction_id, merchant_code, order_code, 
+        pay_bill_code, refund_amount, refund_channel, status, type, remark,
+        create_time,modify_time
+    </sql>
+    
+    <insert id="saveRefund" parameterType="com.morning.star.retail.pay.entity.ScanRefund" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO 
+			retail_scan_refund (<include refid="WITHOUTID" />) 
+		VALUES (
+		  #{code},#{transactionId},#{merchantCode},#{orderCode},#{payBillCode},
+		  #{refundAmount},#{refundChannel},#{status},#{type},#{remark},#{createTime},#{modifyTime}
+		)
+	</insert>
+    
+    
+    <select id="getRefund" resultMap="result">
+    	select
+    		id, <include refid="WITHOUTID"/>
+    	from 
+    		retail_scan_refund
+    	where
+    		code = #{code}
+    </select>
+
+	<update id="updateRefund">
+		update 
+			retail_scan_refund 
+		set
+			transaction_id=#{refund.transactionId}, merchant_code=#{refund.merchantCode},
+			order_code=#{refund.orderCode}, pay_bill_code=#{refund.payBillCode},refund_amount=#{refund.refundAmount}, 
+			refund_channel=#{refund.refundChannel}, status=#{refund.status}, type=#{refund.type},
+			remark=#{refund.remark}, create_time=#{refund.createTime}, modify_time=#{refund.modifyTime}
+		where
+			code = #{code}	
+	</update>
+    
+</mapper>

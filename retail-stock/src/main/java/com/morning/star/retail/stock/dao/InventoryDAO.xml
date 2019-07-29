@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.stock.dao.InventoryDAO">
+
+    <select id="queryByPage" parameterType="com.morning.star.retail.stock.dto.InventoryQueryDTO" resultType="com.morning.star.retail.stock.dto.InventoryDTO">
+        select
+        group_code, group_name, store_code, store_name,
+        inventory_code, inventory_name, type,
+        entry_status, stash_status, statement_status,
+        read_status, audit_status, status, remark,
+        create_time, operator_id, operator_name
+        from retail_inventory
+        where group_code = #{groupCode}
+        <if test="storeCode != null and storeCode != ''">
+            and store_code = #{storeCode}
+        </if>
+        <if test="inventoryCode != null and inventoryCode != ''">
+            and inventory_code like '%${inventoryCode}%'
+        </if>
+        <if test="inventoryName != null and inventoryName != ''">
+            and inventory_name like '%${inventoryName}%'
+        </if>
+        <if test="entryStatus != null">
+            and entry_status = #{entryStatus}
+        </if>
+        <if test="stashStatus != null">
+            and stash_status = #{stashStatus}
+        </if>
+        <if test="statementStatus != null">
+            and statement_status = #{statementStatus}
+        </if>
+        <if test="readStatus != null">
+            and read_status = #{readStatus}
+        </if>
+        <if test="auditStatus != null">
+            and audit_status = #{auditStatus}
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        <if test="beginTime != null">
+            and create_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime != null">
+            and create_time &lt;= #{endTime}
+        </if>
+        and delete_flag = 0
+		order by create_time desc
+	</select>
+
+    <select id="queryWater" resultType="com.morning.star.retail.stock.dto.InventoryWaterDTO">
+        select inventory_code, operate_time, operator_id, operator_name, operator_remark
+        from retail_inventory_water
+        where inventory_code = #{inventoryCode}
+		order by operate_time desc
+	</select>
+
+    <select id="queryItem" parameterType="com.morning.star.retail.stock.dto.InventoryItemQueryDTO" resultType="com.morning.star.retail.stock.dto.InventoryItemDTO">
+        select *
+        from retail_inventory_item
+        where inventory_code = #{inventoryCode}
+        <if test="status != null and status == 12 ">
+            and (status = 1 or status = 2)
+        </if>
+        <if test="status != null and status == 3 ">
+            and status = 3
+        </if>
+        and delete_flag = 0
+        order by create_time desc
+    </select>
+
+    <select id="queryItemByPage" parameterType="com.morning.star.retail.stock.dto.InventoryItemQueryDTO" resultType="com.morning.star.retail.stock.dto.InventoryItemDTO">
+        select *
+        from retail_inventory_item
+        where inventory_code = #{inventoryCode}
+        <if test="status != null and status == 12 ">
+            and (status = 1 or status = 2)
+        </if>
+        <if test="status != null and status == 3 ">
+            and status = 3
+        </if>
+        and delete_flag = 0
+        order by create_time desc
+    </select>
+
+    <select id="queryItemWater" parameterType="com.morning.star.retail.stock.dto.InventoryItemQueryDTO" resultType="com.morning.star.retail.stock.dto.InventoryItemWaterDTO">
+        select inventory_code, goods_code, shelf_num, warehouse_num, adjust_num, total_num, operate_time, operator_id, operator_name, operator_remark
+        from retail_inventory_item_water
+        where inventory_code = #{inventoryCode}
+        <if test="goodsCode != null and goodsCode != ''">
+            and goods_code like '%${goodsCode}%'
+        </if>
+        <if test="operator != null and operator != ''">
+            and (operator_id like '%${operator}%' or operator_name like '%${operator}%')
+        </if>
+        order by operate_time desc
+    </select>
+
+    <select id="queryStatementItemByPage" parameterType="com.morning.star.retail.stock.dto.InventoryStatementQueryDTO" resultType="com.morning.star.retail.stock.dto.InventoryStatementItemDTO">
+        select *
+        from retail_statement_item
+        where statement_code = #{statementCode}
+        order by create_time desc
+    </select>
+
+    <select id="queryStat" resultType="com.morning.star.retail.stock.dto.InventoryStatDTO">
+        SELECT
+            SUM(SHELF_NUM) AS SHELF_NUM,
+            SUM(WAREHOUSE_NUM) AS WAREHOUSE_NUM,
+            SUM(ADJUST_NUM) AS ADJUST_NUM,
+            SUM(TOTAL_NUM) AS TOTAL_NUM
+        FROM
+            retail_inventory_item
+        WHERE
+            inventory_code = #{inventoryCode}
+	</select>
+</mapper>

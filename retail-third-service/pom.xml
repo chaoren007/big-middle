@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.6.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.morning.star.retail</groupId>
+    <artifactId>retail-third-service</artifactId>
+    <version>4.0.4-SNAPSHOT</version>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin.external.google</groupId>
+            <artifactId>android-json</artifactId>
+            <version>0.0.20131108.vaadin1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-wms</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>aaa-jpa-extends</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Web 依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star</groupId>
+            <artifactId>spring-boot-starter-dubbo</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star</groupId>
+            <artifactId>spring-boot-starter-openfalcon</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star</groupId>
+            <artifactId>spring-boot-starter-mybatis</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star</groupId>
+            <artifactId>spring-boot-starter-druid</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star</groupId>
+            <artifactId>spring-boot-starter-log</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <!-- api -->
+
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-base-info-api</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-base-util</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-third-service-api</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <!-- spring test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- excel -->
+        <dependency>
+            <groupId>net.sf.jxls</groupId>
+            <artifactId>jxls-core</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jxls</groupId>
+            <artifactId>jxls-reader</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
+        </dependency>
+
+        <!--JPA -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- swagger ui -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
+        <!-- 全文检索 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.searchbox</groupId>
+            <artifactId>jest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+        </dependency>
+
+        <!-- Spring Retry -->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+
+
+        <!-- 公共组件 -->
+        <dependency>
+            <groupId>com.morning.star</groupId>
+            <artifactId>spring-boot-starter-user</artifactId>
+            <version>5.0.1-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.morning.star</groupId>
+            <artifactId>spring-boot-starter-redis</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-third-service-api</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-stock-api</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-order-api</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-goods-api</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Edgware.SR2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>retail-third-service</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

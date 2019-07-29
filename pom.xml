@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.6.RELEASE</version>
+    </parent>
+
+	<groupId>com.morning.star.retail</groupId>
+	<artifactId>retail-parent</artifactId>
+	<packaging>pom</packaging>
+	<version>4.0.4-SNAPSHOT</version>
+
+	<properties>
+		<java.version>1.8</java.version>
+		
+		<shiro.version>1.2.5</shiro.version>
+		
+	</properties>
+
+	<modules>
+	    <module>spring-boot-starter-cache</module>
+		<module>spring-boot-starter-dubbo</module>
+		<module>spring-boot-starter-log</module>
+		<module>spring-boot-starter-mybatis</module>
+		<module>spring-boot-starter-openfalcon</module>
+		<module>spring-boot-starter-redis</module>
+		<module>spring-boot-starter-druid</module>
+
+		<module>retail-common</module>
+		<module>retail-base-util</module>
+		<module>retail-stock</module>
+		<module>retail-stock-api</module>
+		<module>retail-base-info</module>
+		<module>retail-base-info-api</module>
+		<module>retail-order</module>
+		<module>retail-order-api</module>
+		<module>retail-pay</module>
+		<module>retail-pay-api</module>
+		<module>retail-admin</module>
+		<module>retail-admin-api</module>
+    	<module>retail-task</module>
+        <module>retail-mq</module>
+		<module>retail-shiro</module>
+		<module>retail-base-server</module>
+        <module>retail-goods</module>
+		<module>retail-admin-god-acc</module>
+		<module>retail-admin-group-acc</module>
+		<module>retail-admin-store-acc</module>
+		<module>retail-admin-supplier-acc</module>
+        <module>retail-goods-api</module>
+		<module>retail-push-msg</module>
+		<!--<module>retail-thread-info</module>-->
+		<module>retail-config</module>
+		<module>aaa-jpa-extends</module>
+        <module>retail-push-msg-api</module>
+
+        <module>retail-export</module>
+        <module>retail-export-api</module>
+        <module>retail-export-jar</module>
+        <module>retail-wms</module>
+        <module>retail-third-service</module>
+		<module>retail-third-service-api</module>
+    </modules>
+	
+	<distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://123.207.66.236:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://123.207.66.236:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+	
+</project>

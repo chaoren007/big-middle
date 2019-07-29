@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.star.retail.stock.dao.TransferDAO" >
+
+    <sql id="Base_Column" >
+        transfer_code,outstock_code,group_code,
+        receiver_code,receiver_name,sender_code,sender_name,
+        status,delete_flag,create_time,modify_time,operator_id,operator_name,remark
+    </sql>
+
+    <sql id="Base_Where">
+    <where>
+      <if test="transferCode != null and transferCode != ''">
+        AND transfer_code = #{transferCode}
+      </if>
+      <if test="outStockCode != null and outStockCode != ''">
+        AND outstock_code = #{outStockCode}
+      </if>
+      <if test="groupCode != null and groupCode != ''">
+        AND group_code = #{groupCode}
+      </if>
+      <if test="status != null">
+        AND status = #{status}
+      </if>
+      <if test="receiverCode != null and receiverCode != ''">
+        AND receiver_code = #{receiverCode}
+      </if>
+      <if test="receiverName != null and receiverName != ''">
+        AND receiver_name = #{receiverName}
+      </if>
+      <if test="senderCode != null and senderCode != ''">
+        AND sender_code = #{senderCode}
+      </if>
+      <if test="senderName != null and senderName != ''">
+        AND sender_name = #{senderName}
+      </if>
+      AND delete_flag = 0
+    </where>
+    </sql>
+
+    <select id="selectByPage" parameterType="com.morning.star.retail.stock.dto.TransferQueryDTO" resultType="com.morning.star.retail.stock.dto.TransferDTO">
+        SELECT
+        <include refid="Base_Column" />
+        FROM retail_transfer
+        where group_code = #{groupCode}
+        <if test="transferCode != null and transferCode != ''">
+            AND transfer_code LIKE '%${transferCode}%'
+        </if>
+        <if test="outStockCode != null and outStockCode != ''">
+            AND outstock_code LIKE '%${outStockCode}%'
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        <if test="platform != null and platform == 'group'">
+            AND status != 0
+        </if>
+        <if test="receiverCode != null and receiverCode != ''">
+            AND receiver_code LIKE '%${receiverCode}%'
+        </if>
+        <if test="receiverName != null and receiverName != ''">
+            AND receiver_name LIKE '%${receiverName}%'
+        </if>
+        <if test="senderCode != null and senderCode != ''">
+            AND sender_code LIKE '%${senderCode}%'
+        </if>
+        <if test="senderName != null and senderName != ''">
+            AND sender_name LIKE '%${senderName}%'
+        </if>
+        <if test="startTime != null">
+            AND create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND create_time &lt;= #{endTime}
+        </if>
+        AND delete_flag = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectItemByPage" parameterType="com.morning.star.retail.stock.dto.TransferQueryDTO" resultType="com.morning.star.retail.stock.dto.TransferItemDTO">
+        SELECT *
+        FROM retail_transfer_item
+        where transfer_code = #{transferCode}
+        AND delete_flag = 0
+        ORDER BY create_time DESC
+    </select>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.dao.GroupDAO">
+    <sql id="groupSql">
+		group_code,group_name,merchant_code,province_id,province,city_id,city,district_id,district,address,type,role_ids,delete_flag,access_ids,
+		create_time,modify_time,operator_id,operator_name,creator,creator_name
+	</sql>
+
+    <select id="getCode" resultType="String">
+        SELECT group_code
+        FROM retail_group
+        <where>
+            group_code LIKE 'JT%'
+        </where>
+        ORDER BY group_code desc limit 1
+    </select>
+
+    <select id="selectAll" parameterType="com.morning.star.retail.dto.group.GroupQueryDTO"
+            resultType="com.morning.star.retail.dto.group.GroupInfoDTO">
+        SELECT
+        <include refid="groupSql"/>
+        FROM retail_group
+        <where>
+            <if test="groupCode!=null and groupCode!=''">
+                group_code =#{groupCode}
+            </if>
+            <if test="groupName!=null and groupName!=''">
+                AND group_name LIKE '%${groupName}%'
+            </if>
+            <if test="type!=null">
+                AND type=#{type}
+            </if>
+            <if test="findRoleIds!=null and findRoleIds!=''">
+                AND (role_ids = #{findRoleIds} 
+                    OR role_ids like '${findRoleIds},%' 
+                    OR role_ids like '%,${findRoleIds}'
+                    OR role_ids like '%,${findRoleIds},%')
+            </if>
+            <if test="findGroupAccessIds!=null and findGroupAccessIds!=''">
+                AND (access_ids = #{findGroupAccessIds}
+                    OR access_ids like '${findGroupAccessIds},%'
+                    OR access_ids like '%,${findGroupAccessIds}'
+                    OR access_ids like '%,${findGroupAccessIds},%')
+            </if>
+            and delete_flag = 0
+        </where>
+        ORDER BY create_time desc
+    </select>
+
+    <select id="selectOne" parameterType="com.morning.star.retail.dto.group.GroupQueryDTO"
+            resultType="com.morning.star.retail.dto.group.GroupInfoDTO">
+        SELECT
+        <include refid="groupSql"/>
+        FROM retail_group
+        <where>
+            <if test="groupCode!=null and groupCode!=''">
+                group_code=#{groupCode}
+            </if>
+            <if test="groupName!=null and groupName!=''">
+                AND group_name=#{groupName}
+            </if>
+            <if test="type!=null">
+                AND type=#{type}
+            </if>
+            and delete_flag = 0
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.star.retail.stock.dao.SupplierStockDAO" >
+  <resultMap id="BaseResultMap" type="com.morning.star.retail.stock.po.SupplierStockPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="store_code" property="storeCode" jdbcType="VARCHAR" />
+    <result column="goods_code" property="goodsCode" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="supplier_code" property="supplierCode" jdbcType="VARCHAR" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    <result column="upc_code" property="upcCode" jdbcType="VARCHAR" />
+    <result column="sales_type" property="salesType" jdbcType="INTEGER" />
+    <result column="done_in_stock_num" property="doneInStockNum" jdbcType="INTEGER" />
+    <result column="used_stock_num" property="usedStockNum" jdbcType="INTEGER" />
+    <result column="wait_in_stock_num" property="waitInStockNum" jdbcType="INTEGER" />
+    <result column="pre_stock_num" property="preStockNum" jdbcType="INTEGER" />
+    <result column="wait_out_stock_num" property="waitOutStockNum" jdbcType="INTEGER" />
+    <result column="done_out_stock_num" property="doneOutStockNum" jdbcType="INTEGER" />
+    <result column="units" property="units" jdbcType="VARCHAR" />
+    <result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
+    <result column="spec_num" property="specNum" jdbcType="INTEGER" />
+    <result column="spec_units" property="specUnits" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="operator_id" property="operatorId" jdbcType="INTEGER" />
+    <result column="operator_name" property="operatorName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column" >
+    id, company_code, store_code, goods_code, goods_name, supplier_code, supplier_name,
+    upc_code, sales_type, done_in_stock_num,
+    (done_in_stock_num - pre_stock_num - wait_out_stock_num) as used_stock_num,
+    wait_in_stock_num, pre_stock_num, wait_out_stock_num, done_out_stock_num, units, goods_type, spec_num, spec_units,
+    delete_flag, create_time, modify_time, operator_id, operator_name, remark
+  </sql>
+
+  <sql id="Base_Where">
+    <where>
+      <if test="companyCode != null and companyCode !=''">
+        company_code = #{companyCode}
+      </if>
+      <if test="storeCode != null and storeCode != ''">
+        and store_code = #{storeCode}
+      </if>
+      <if test="goodsCode != null and goodsCode != ''">
+        and goods_code = #{goodsCode}
+      </if>
+      <if test="upcCode != null and upcCode != ''">
+        and upc_code = #{upcCode}
+      </if>
+      <if test="supplierCode != null and supplierCode != ''">
+        and supplier_code = #{supplierCode}
+      </if>
+      <if test="salesType != null">
+        and sales_type = #{salesType}
+      </if>
+    </where>
+  </sql>
+
+  <sql id="Single_Where">
+      where company_code = #{companyCode} and store_code = #{storeCode} and goods_code = #{goodsCode}
+      and supplier_code = #{supplierCode} and sales_type = #{salesType}
+  </sql>
+
+  <select id="select" parameterType="com.morning.star.retail.stock.dto.SupplierStockQueryDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column"/>
+    from retail_supplier_stock
+    <include refid="Base_Where"/>
+    order by id desc
+  </select>
+
+  <select id="selectOne" parameterType="com.morning.star.retail.stock.dto.SupplierStockQueryDTO" resultType="com.morning.star.retail.stock.po.SupplierStockPO">
+    select
+    <include refid="Base_Column"/>
+    from retail_supplier_stock
+    <include refid="Single_Where"/>
+  </select>
+
+  <select id="count" parameterType="com.morning.star.retail.stock.dto.SupplierStockQueryDTO" resultType="Integer">
+    select count(id)
+    from retail_supplier_stock
+    <include refid="Base_Where"/>
+  </select>
+
+  <insert id="insert" parameterType="com.morning.star.retail.stock.bean.SupplierStockDO" >
+    insert into retail_supplier_stock (company_code, store_code,
+      goods_code, goods_name, supplier_code,
+      supplier_name, upc_code, sales_type,
+      done_in_stock_num, used_stock_num, wait_in_stock_num,
+      pre_stock_num, wait_out_stock_num, done_out_stock_num,
+      units, goods_type, spec_num,
+      spec_units, delete_flag, create_time,
+      modify_time, operator_id, operator_name,
+      remark)
+    values (#{companyCode}, #{storeCode},
+      #{goodsCode}, #{goodsName}, #{supplierCode},
+      #{supplierName}, #{upcCode}, #{salesType},
+      #{doneInStockNum}, #{usedStockNum},
+      <if test="waitInStockNum == null">
+        0,
+      </if>
+      <if test="waitInStockNum != null">
+        #{waitInStockNum},
+      </if>
+      0,0,0,
+      #{units}, #{goodsType}, #{specNum},
+      #{specUnits}, 0, SYSDATE,
+      SYSDATE, #{operatorId}, #{operatorName},
+      #{remark})
+  </insert>
+
+  <update id="update" parameterType="com.morning.star.retail.stock.bean.SupplierStockDO">
+    update retail_supplier_stock
+    set modify_time = SYSDATE,operator_id = #{operatorId},operator_name = #{operatorName}
+    <if test="doneInStockNum != null">
+      ,done_in_stock_num = #{doneInStockNum}
+    </if>
+    <if test="usedStockNum != null">
+      ,used_stock_num = #{usedStockNum}
+    </if>
+    <if test="waitInStockNum != null">
+      ,wait_in_stock_num = #{waitInStockNum}
+    </if>
+    <if test="preStockNum != null">
+      ,pre_stock_num = #{preStockNum}
+    </if>
+    <if test="waitOutStockNum != null">
+      ,wait_out_stock_num = #{waitOutStockNum}
+    </if>
+    <if test="doneOutStockNum != null">
+      ,done_out_stock_num = #{doneOutStockNum}
+    </if>
+    <if test="remark != null and remark != ''">
+      ,remark = #{remark}
+    </if>
+    <include refid="Single_Where" />
+  </update>
+
+  <update id="updateByInc" parameterType="com.morning.star.retail.stock.bean.SupplierStockDO">
+    update retail_supplier_stock
+    set modify_time = SYSDATE,operator_id = #{operatorId},operator_name = #{operatorName}
+    <if test="doneInStockNum != null">
+      ,done_in_stock_num = done_in_stock_num + #{doneInStockNum}
+    </if>
+    <if test="usedStockNum != null">
+      ,used_stock_num = used_stock_num + #{usedStockNum}
+    </if>
+    <if test="waitInStockNum != null">
+      ,wait_in_stock_num = wait_in_stock_num + #{waitInStockNum}
+    </if>
+    <if test="preStockNum != null">
+      ,pre_stock_num = pre_stock_num + #{preStockNum}
+    </if>
+    <if test="waitOutStockNum != null">
+      ,wait_out_stock_num = wait_out_stock_num + #{waitOutStockNum}
+    </if>
+    <if test="doneOutStockNum != null">
+      ,done_out_stock_num = done_out_stock_num + #{doneOutStockNum}
+    </if>
+    <if test="remark != null and remark != ''">
+      ,remark = #{remark}
+    </if>
+    <include refid="Single_Where" />
+  </update>
+
+  <update id="updateDoneInStockNum" parameterType="com.morning.star.retail.stock.bean.SupplierStockDO">
+    update retail_supplier_stock
+    set modify_time = SYSDATE,operator_id = #{operatorId},operator_name = #{operatorName}
+    <if test="doneInStockNum != null">
+      ,used_stock_num = #{doneInStockNum} - pre_stock_num - wait_out_stock_num
+      ,done_in_stock_num = #{doneInStockNum}
+    </if>
+    <include refid="Single_Where" />
+  </update>
+</mapper>

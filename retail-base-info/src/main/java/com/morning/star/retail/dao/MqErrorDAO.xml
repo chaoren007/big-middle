@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.dao.MqErrorDAO">
+    <sql id="groupSql">
+		group_code,group_name,merchant_code,province_id,province,city_id,city,district_id,district,address,type,role_ids,delete_flag,access_ids,
+		create_time,modify_time,operator_id,operator_name,creator,creator_name
+	</sql>
+    <insert id="insert" parameterType="com.morning.star.retail.dto.MqerrorDTO">
+        insert into mq_error_log(exchange,routing_key,queue,json)
+        values(#{exchange},#{routingKey},#{queue},#{json})
+    </insert>
+</mapper>

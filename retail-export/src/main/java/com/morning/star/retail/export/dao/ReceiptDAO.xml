@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.export.dao.ReceiptDAO">
+
+    <sql id="baseSql">
+		receipt_code, create_time, amount, expected_receipt_time, group_code, group_name, outstock_code, receipt_time, receipt_type,
+		receipt_type_code, remark, store_code, store_name, supplier_code, supplier_name, trans_status
+	</sql>
+
+    <select id="selectAll" parameterType="com.morning.star.retail.export.dto.ReceiptQueryDTO" resultType="com.morning.star.retail.export.dto.ReceiptDTO">
+        select
+        <include refid="baseSql" />
+        from retail_receipt
+        where 1=1
+        <if test="receiptCode != null and receiptCode != ''">
+            and  receipt_code like '%${receiptCode}%'
+        </if>
+        <if test="groupCode != null and groupCode != ''">
+            and group_code = #{groupCode}
+        </if>
+        <if test="storeCode != null and storeCode != ''">
+            and  store_code=#{storeCode}
+        </if>
+        <if test="storeCode != null and storeCode != ''">
+            and  store_code=#{storeCode}
+        </if>
+        <if test="receiptTypeCode != null and receiptTypeCode != ''">
+            and  receipt_type_code like '%${receiptTypeCode}%'
+        </if>
+        <if test="storeName != null and storeName != ''">
+            and  store_name like '%${storeName}%'
+        </if>
+        <if test="supplierCode!=null and supplierCode!=''">
+            and supplier_code like '%${supplierCode}%'
+        </if>
+        <if test="supplierName!=null and supplierName!=''">
+            and supplier_name like '%${supplierName}%'
+        </if>
+        <if test="receiptType!=null">
+            and receipt_type=#{receiptType}
+        </if>
+        <if test="transStatus!=null">
+            and trans_status=#{transStatus}
+        </if>
+        <if test="beginTime != null">
+            AND create_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime != null">
+            AND create_time &lt;= #{endTime}
+        </if>
+        order by create_time desc
+    </select>
+</mapper>

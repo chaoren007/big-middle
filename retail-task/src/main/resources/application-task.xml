@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task.xsd">
+
+
+    <task:scheduled-tasks>
+        <task:scheduled ref="afterSalesCheckMissedRefundOrderTask" method="execute" cron="0 0/1 * * * ?"/>
+        <task:scheduled ref="afterSalesCheckRefundSuccessTask" method="execute" cron="0 0/1 * * * ?"/>
+        <task:scheduled ref="afterSalesRejectionCloseOrderTask" method="execute" cron="0 0/1 * * * ?"/>
+        <task:scheduled ref="afterSalesStockCheckTask" method="execute" cron="0 0/1 * * * ?"/>
+        <task:scheduled ref="salesOrderAutoDoneTask" method="run" cron="0 0/1 * * * ?"/>
+        <!-- 
+        <task:scheduled ref="SalesOrderAutoReceiptTask" method="run" cron="0 0/1 * * * ?"/>
+         -->
+        <task:scheduled ref="salesOrderCancelFixTask" method="run" cron="10 0/1 * * * ?"/>
+        <task:scheduled ref="salesOrderDeliveryFixTask" method="run" cron="20 0/1 * * * ?"/>
+        <task:scheduled ref="salesOrderPayResultTask" method="run" cron="30 0/1 * * * ?"/>
+        <task:scheduled ref="salesOrderPaySuccFixTask" method="run" cron="30 0/1 * * * ?"/>
+        <task:scheduled ref="salesOrderPayTimeoutFixTask" method="run" cron="40 0/1 * * * ?"/>
+        <!-- 
+        <task:scheduled ref="salesOrderPayTimeoutTask" method="run" cron="50 0/1 * * * ?"/>
+         -->
+        <task:scheduled ref="expiredLimitActivityTask" method="run" cron="0 */1 * * * ?"/>
+        <task:scheduled ref="expiredSaleActivityTask" method="run" cron="0 */1 * * * ?"/>
+        <task:scheduled ref="expiredActivityTask" method="run" cron="10 0/1 * * * ?"/>
+        <task:scheduled ref="couponExpiredTask" method="run" cron="10 0/1 * * * ?"/>
+        <task:scheduled ref="statementOrderGenerateTask" method="run" cron="0 0 1 * * ?"/>
+        <task:scheduled ref="refundPayResultTask" method="run" cron="0 0/1 * * * ?"/>
+        <task:scheduled ref="salesOrderPrecardTask" method="run" cron="0 */5 * * * ?"/>
+        <!-- initial-delay是任务第一次被调用前的延时，单位毫秒
+         fixed-delay是上一个调用完成后再次调用的延时
+         fixed-rate是上一个调用开始后再次调用的延时（不用等待上一次调用完成）
+         -->
+        <task:scheduled ref="activityOffStatusTask" method="run" cron="0 */2 * * * ?"/>
+        <!-- 聚合支付的补偿 -->
+        <!--<task:scheduled ref="unifyPayTask" method="run" cron="0 0/1 * * * ?"/>-->
+     
+    
+    </task:scheduled-tasks>
+
+
+
+</beans>

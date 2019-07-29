@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.star.retail.admin.dao.ResourceDAO" >
+    <resultMap id="BaseResultMap" type="com.morning.star.retail.admin.po.ResourcePO" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="resource_level" property="resourceLevel" jdbcType="VARCHAR" />
+        <result column="classify" property="classify" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <result column="parent_ids" property="parentIds" jdbcType="VARCHAR" />
+        <result column="power" property="power" jdbcType="VARCHAR" />
+        <result column="priority" property="priority" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+        <result column="operator_id" property="operatorId" jdbcType="VARCHAR" />
+        <result column="operator_name" property="operatorName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column" >
+    id, name, type, resource_level, classify, url, parent_id, parent_ids, power, priority, status, create_time,
+    modify_time, operator_id, operator_name
+  </sql>
+
+    <sql id="Base_Where" >
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="name != null">
+                and name = #{name}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="resourceLevel != null">
+                and resource_level = #{resourceLevel}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="classify != null and classify!=''" >
+                and classify = #{classify}
+            </if>
+            <if test="resourceIds != null">
+                and id in
+                <foreach collection="resourceIds" index="index" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="com.morning.star.retail.admin.dto.ResourceQueryDTO" >
+        select
+        <include refid="Base_Column" />
+        from access_resource
+        <include refid="Base_Where" />
+    </select>
+
+    <select id="selectResource" resultType="java.lang.String" >
+        select distinct power
+        from access_resource
+        where id in
+        <foreach collection="resourceIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="count" parameterType="com.morning.star.retail.admin.dto.ResourceQueryDTO" resultType="java.lang.Integer" >
+        select count(*)
+        from access_resource
+        <include refid="Base_Where" />
+    </select>
+
+    <insert id="insert" parameterType="com.morning.star.retail.admin.bean.ResourceDO" useGeneratedKeys="true" keyProperty="id" >
+    insert into access_resource (id, name, type, resource_level, url, parent_id,
+      parent_ids, power, priority, status, classify,
+      create_time, modify_time, operator_id, operator_name)
+    values (#{id}, #{name}, #{type}, #{resourceLevel}, #{url}, #{parentId},
+      #{parentIds}, #{power}, 0, 0, #{classify},
+      SYSDATE, SYSDATE, #{operatorId}, #{operatorName})
+  </insert>
+
+    <insert id="insertLog" parameterType="com.morning.star.retail.admin.bean.ResourceDO" >
+    insert into access_resource_log (resource_id, name, type, resource_level, url, parent_id,
+      parent_ids, power, priority, status, classify,
+      create_time, modify_time, operator_id, operator_name)
+    values (#{id}, #{name}, #{type}, #{resourceLevel}, #{url}, #{parentId},
+      #{parentIds}, #{power}, 0, 0, #{classify},
+      SYSDATE, SYSDATE, #{operatorId}, #{operatorName})
+  </insert>
+
+    <update id="update" parameterType="com.morning.star.retail.admin.bean.ResourceDO" >
+        update access_resource
+        set name = #{name}, modify_time = SYSDATE, operator_id = #{operatorId}, operator_name = #{operatorName}
+        <!--
+        <if test="name != null" >
+          ,name = #{name}
+        </if>
+        <if test="type != null" >
+          ,type = #{type}
+        </if>
+        <if test="resourceLevel != null" >
+          ,resource_level = #{resourceLevel}
+        </if>
+        <if test="url != null" >
+          ,url = #{url}
+        </if>
+        <if test="parentId != null" >
+          ,parent_id = #{parentId}
+        </if>
+        <if test="parentIds != null" >
+          ,parent_ids = #{parentIds}
+        </if>
+        <if test="power != null" >
+          ,power = #{power}
+        </if>
+        <if test="priority != null" >
+          ,priority = #{priority}
+        </if>
+        <if test="status != null" >
+          ,status = #{status}
+        </if>
+         -->
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long" >
+      delete from access_resource where id = #{id}
+    </delete>
+</mapper>

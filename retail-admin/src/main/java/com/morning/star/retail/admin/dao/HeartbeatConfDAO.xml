@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.admin.dao.HeartbeatConfDAO">
+
+    <select id="getConf" resultType="com.morning.star.retail.admin.bean.HeartbeatConfDO">
+        select  id,interval,alert_limit
+        from retail_heartbeat_conf
+        where
+        company_code = #{companyCode}
+    </select>
+
+    <update id="updateConf">
+        update  retail_heartbeat_conf set
+            interval = #{interval},
+            alert_limit = #{alertLimit}
+
+        where
+            company_code = #{companyCode}
+    </update>
+
+</mapper>

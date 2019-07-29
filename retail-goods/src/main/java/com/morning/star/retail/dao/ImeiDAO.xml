@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.dao.ImeiDAO">
+	<sql id="base_cloumn">
+		imei_code,imei_name,instock_code,instock_time,in_price,outstock_code,outstock_time,out_price,sap_code,re_mark,store_code,group_code
+	</sql>
+
+	<sql id="base_where">
+		<where>
+			delete_flag != 1
+			and group_code = #{groupCode}
+			<if test="imeiCode != null and imeiCode != ''">
+				and imei_code  = #{imeiCode}
+			</if>
+			<if test="storeCode != null and storeCode != ''">
+				and store_code  = #{storeCode}
+			</if>
+
+		</where>
+	</sql>
+
+	<select id="queryPage" parameterType="com.morning.star.retail.facade.dto.ImeiQueryDTO"
+		resultType="com.morning.star.retail.facade.dto.ImeiAddDTO">
+		select
+		<include refid="base_cloumn" />
+		from retail_goods_imei
+		<include refid="base_where" />
+		order by imei_code
+	</select>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.order.dao.BusAfterSalesOrderDAO">
+    <select id="getBusAfterSales" parameterType="com.morning.star.retail.order.facade.dto.BusAfterSalesQueryDTO"
+            resultType="com.morning.star.retail.order.facade.dto.BusAfterSalesDTO">
+        select
+        after_sales_code,supply_code,p_code,p_name,count,amount,city_id,city_name,after_sales_time,after_sales_type,
+        after_sales_type_name,status,status_name,reason,description,img_path
+        from bus_retail_after_sales_order
+        where 1=1
+        <if test="afterSalesType != null ">
+            AND after_sales_type = #{afterSalesType}
+        </if>
+        <if test="afterSalesStatus != null ">
+            AND after_sales_status = #{afterSalesStatus}
+        </if>
+        <if test="startTime != null ">
+            AND create_time &gt; #{startTime}
+        </if>
+        <if test="endTime != null ">
+            AND create_time &lt; #{endTime}
+        </if>
+        <if test="afterSalesCode != null and afterSalesCode !='' ">
+            AND after_sales_code = #{afterSalesCode}
+        </if>
+        <if test="supplyCode != null and supplyCode !='' ">
+            AND supply_code = #{supplyCode}
+        </if>
+        <if test="pName != null and pName !='' ">
+            AND p_name = #{pName}
+        </if>
+        <if test="cityName != null and cityName !='' ">
+            AND city_name = #{cityName}
+        </if>
+        order by create_time
+
+    </select>
+</mapper>

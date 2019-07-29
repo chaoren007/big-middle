@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.stock.dao.OutStockDAO">
+
+    <sql id="baseSql">
+		out_stock_code,in_stock_code,
+		group_code,group_name,
+		out_store_code,out_store_name,
+		out_warehouse_code, out_warehouse_name,
+		in_store_code,in_store_name,
+		in_warehouse_code,in_warehouse_name,
+		type, status,
+		remark,
+		approve_id,approve_name,approve_date,
+		creator_id,creator_name,
+		create_time,modify_time,
+		operator_id,operator_name
+	</sql>
+
+    <select id="queryPage" parameterType="com.morning.star.retail.facade.dto.out.OutStockQueryDTO"
+            resultType="com.morning.star.retail.facade.dto.out.OutStockDTO">
+        select out_stock_code,in_stock_code,
+        group_code,group_name,
+        out_store_code,out_store_name,
+        out_warehouse_code, out_warehouse_name,
+        in_store_code,in_store_name,
+        in_warehouse_code,in_warehouse_name,
+        type, status,
+        remark,
+        approve_id,approve_name,approve_date,
+        creator_id,creator_name,
+        create_time,modify_time,
+        operator_id,operator_name
+        from retail_out_stock
+        where delete_flag = 0
+        <if test="groupCode != null and groupCode != ''">
+            and group_code = #{groupCode}
+        </if>
+        <if test="storeCode != null and storeCode != ''">
+            and out_store_code = #{storeCode}
+        </if>
+        <if test="outStockCode != null and outStockCode != ''">
+            and out_stock_code = #{outStockCode}
+        </if>
+        <if test="outWarehouseCode != null and outWarehouseCode != ''">
+            and out_warehouse_code = #{outWarehouseCode}
+        </if>
+        <if test="status!=null and status !=''">
+            and status=#{status}
+        </if>
+        <if test="type!=null and type !=''">
+            and type=#{type}
+        </if>
+        <if test="beginTime != null and beginTime != ''">
+            and create_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND create_time &lt;= #{endTime}
+        </if>
+        order by create_time desc
+    </select>
+</mapper>

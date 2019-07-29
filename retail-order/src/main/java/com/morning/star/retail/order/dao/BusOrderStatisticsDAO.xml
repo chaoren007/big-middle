@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.order.dao.BusOrderStatisticsDAO">
+    <select id="statisticsOrder" parameterType="java.util.Date"
+            resultType="com.morning.star.retail.order.domain.entity.BusOrderStatisticsEntity">
+        SELECT SUM(count) as count,SUM(supply_amount) as amount,date
+        from retail_base_info.retail_supplier_bus_item
+        where date = #{date}
+        GROUP BY date
+    </select>
+
+    <select id="statisticOrderStatus" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      select count(*) as num
+      from retail_base_info.retail_supplier_bus_item
+      where status = #{statusCode}
+      GROUP BY status
+
+    </select>
+
+    <select id="getNoDealAfterSalesNum" resultType="java.lang.Integer">
+     SELECT count(*) AS num
+     FROM bus_retail_after_sales_order
+     WHERE STATUS = 0
+    </select>
+
+    <select id="getBusTopItems" resultType="com.morning.star.retail.order.facade.dto.BusTopItemsDTO">
+        select p_code,p_name,SUM(count) as count
+        from retail_base_info.retail_supplier_bus_item
+        where DATE_SUB(CURDATE(), INTERVAL 30 DAY) &lt;= date(create_time)
+        GROUP BY p_code
+        ORDER BY count desc
+        LIMIT 0,5
+
+    </select>
+</mapper>

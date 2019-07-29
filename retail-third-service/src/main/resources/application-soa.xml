@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:provider delay="-1" timeout="6000" retries="0"/>
+
+    <!-- 要暴露的服务接口 -->
+    <!--<dubbo:service interface="com.morning.star.retail.facade.ProductFacade"-->
+                   <!--ref="productFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>-->
+    <dubbo:service interface="com.morning.star.retail.facade.ProductWmsFacade"
+                    ref="productWmsFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.CategoryWmsFacade"
+                   ref="categoryWmsFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.PurchaseWmsFacade"
+                   ref="purchaseWmsFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.StorageWmsFacade"
+                   ref="storageWmsFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.SupplierWmsFacade"
+                   ref="supplierWmsFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+
+
+
+    <!-- 要引用的服务 -->
+    <!--<dubbo:reference interface="com.morning.star.retail.facade.StoreFacade"-->
+                     <!--id="storeFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"-->
+                     <!--timeout="3000" check="false"></dubbo:reference>-->
+
+    <dubbo:reference interface="com.morning.star.retail.facade.OutStockFacade"
+                     id="outstockFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="3000" check="false"></dubbo:reference>
+    <dubbo:reference interface="com.morning.star.retail.facade.ReceiptFacade"
+                     id="receiptFacade" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"></dubbo:reference>
+    <dubbo:reference interface="com.morning.star.retail.order.facade.BusOrderFacade"
+                     id="busOrderFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"></dubbo:reference>
+
+    <dubbo:reference interface="com.morning.star.retail.facade.GoodsSupplyFacade"
+                     id="goodsSupplyFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="3000" check="false"></dubbo:reference>
+
+</beans>

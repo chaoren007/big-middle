@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.dao.StoreDAO">
+	<select id="getCode" resultType="String">
+        select store_code
+        from retail_store
+        <where>
+            store_code LIKE 'GS%'
+        </where>
+        ORDER BY store_code desc limit 1
+    </select>
+
+
+    <select id="selectAll" parameterType="com.morning.star.retail.dto.store.StoreQueryDTO"
+            resultType="com.morning.star.retail.dto.store.StoreDTO">
+        select
+        store_code, create_time, delete_flag, modify_time, operator_id, operator_name, access_ids,
+        address, can_add_goods, can_price_goods, city_id, city_name, close_time, county_id, county_name,
+        customer_service, deliver_range, deliver_type, email, free_postage_order_fee, group_code, group_name,
+        instant_service, is_free, latitude, longitude, manager, max_pos_num, mobile, model, nextday_service,
+        open_time, order_end_time, pay_type, postage_config, postage_fee, province_id, province_name, qq, remark,
+        status, stock_model, store_name, tel, type
+
+        from retail_store
+        <where>
+            delete_flag = 0
+            <if test="groupCode != null and groupCode != ''">
+                AND group_code = #{groupCode}
+            </if>
+            <if test="storeCode != null and storeCode != ''">
+                AND store_code = #{storeCode}
+            </if>
+            <if test="storeCodes != null and storeCodes.size() > 0">
+                AND store_code in
+                <foreach collection="storeCodes" item="storeCode" index="index" open="(" close=")" separator=",">
+                    #{storeCode}
+                </foreach>
+            </if>
+            <if test="storeName != null and storeName != ''">
+                AND store_name like '%${storeName}%'
+            </if>
+            <if test="keyWord != null and keyWord != ''">
+                AND (store_code like '%${keyWord}%' or store_name like '%${keyWord}%')
+            </if>
+            <if test="tel != null and tel != ''">
+                AND tel = #{tel}
+            </if>
+            <if test="manager != null and manager != ''">
+                AND manager = #{manager}
+            </if>
+            <if test="status != null and status != ''">
+                AND status = #{status}
+            </if>
+            <if test="isFree != null">
+                AND is_free = #{isFree}
+            </if>
+            <if test="findAccessIds != null and findAccessIds != ''">
+                AND access_ids = #{findAccessIds}
+            </if>
+        </where>
+        order by store_code
+    </select>
+
+    <select id="selectAllList" parameterType="com.morning.star.retail.dto.store.StoreQueryDTO"
+            resultType="com.morning.star.retail.dto.store.StoreDTO">
+        select
+        store_code, create_time, delete_flag, modify_time, operator_id, operator_name, access_ids,
+        address, can_add_goods, can_price_goods, city_id, city_name, close_time, county_id, county_name,
+        customer_service, deliver_range, deliver_type, email, free_postage_order_fee, group_code, group_name,
+        instant_service, is_free, latitude, longitude, manager, max_pos_num, mobile, model, nextday_service,
+        open_time, order_end_time, pay_type, postage_config, postage_fee, province_id, province_name, qq, remark,
+        status, stock_model, store_name, tel, type
+
+        from retail_store
+        <where>
+            delete_flag = 0
+            <if test="groupCode != null and groupCode != ''">
+                AND group_code = #{groupCode}
+            </if>
+            <if test="storeCode != null and storeCode != ''">
+                AND store_code = #{storeCode}
+            </if>
+            <if test="storeCodes != null and storeCodes.size() > 0">
+                AND store_code in
+                <foreach collection="storeCodes" item="storeCode" index="index" open="(" close=")" separator=",">
+                    #{storeCode}
+                </foreach>
+            </if>
+            <if test="storeName != null and storeName != ''">
+                AND store_name like '%${storeName}%'
+            </if>
+            <if test="keyWord != null and keyWord != ''">
+                AND (store_code like '%${keyWord}%' or store_name like '%${keyWord}%')
+            </if>
+            <if test="tel != null and tel != ''">
+                AND tel = #{tel}
+            </if>
+            <if test="manager != null and manager != ''">
+                AND manager = #{manager}
+            </if>
+            <if test="status != null and status != ''">
+                AND status = #{status}
+            </if>
+            <if test="isFree != null">
+                AND is_free = #{isFree}
+            </if>
+            <if test="findAccessIds != null and findAccessIds != ''">
+                AND access_ids = #{findAccessIds}
+            </if>
+        </where>
+        order by store_code
+    </select>
+
+    <select id="selectCity" resultType="com.morning.star.retail.dto.store.CityDTO">
+        SELECT DISTINCT city_id,city_name FROM `retail_store` WHERE group_code = #{groupCode} AND delete_flag = 0;
+    </select>
+
+</mapper>

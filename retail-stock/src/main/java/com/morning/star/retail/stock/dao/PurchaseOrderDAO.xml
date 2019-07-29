@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.stock.dao.PurchaseOrderDAO">
+
+    <sql id="baseSql">
+		purchase_code,receipt_code,
+		group_code,group_name,
+		store_code,store_name,
+		city_id, city_name,
+		supplier_code,supplier_name,
+		status,trans_status,payments,amount,rate_amount,contract,remark,
+		approve_id,approve_name,approve_date,submit_type,
+		create_time,modify_time,
+		creator_id,creator_name,
+		operator_id,operator_name
+	</sql>
+
+    <select id="queryPage" parameterType="com.morning.star.retail.facade.dto.purchase.PurchaseQueryDTO"
+            resultType="com.morning.star.retail.facade.dto.purchase.PurchaseOrderSimpleDTO">
+        select purchase_code,status,trans_status,submit_type,
+        supplier_code,supplier_name,
+        amount,rate_amount,
+        create_time,city_id, city_name,
+        IFNULL(modify_time,create_time) as modifyTime,creator_id,creator_name,operator_id,operator_name
+        from retail_purchase
+        where delete_flag = 0
+        <if test="groupCode != null and groupCode != ''">
+            AND group_code = #{groupCode}
+        </if>
+        <if test="storeCode != null and storeCode != ''">
+            and store_code = #{storeCode}
+        </if>
+        <if test="cityId != null">
+            and city_id = #{cityId}
+        </if>
+        <if test="purchaseCode != null and purchaseCode != ''">
+            and purchase_code like '%${purchaseCode}%'
+        </if>
+        <if test="creator != null and creator != ''">
+            and (creator_id=#{creator} or creator_name like '%${creator}%' )
+        </if>
+        <if test="supplierCode != null and supplierCode != ''">
+            and supplier_code=#{supplierCode}
+        </if>
+        <if test="supplierName != null and supplierName !=''">
+            AND supplier_name like '%${supplierName}%'
+        </if>
+        <if test="status!=null and status !=''">
+            and status=#{status}
+        </if>
+        <if test="submitType!=null">
+            and submit_type=#{submitType}
+        </if>
+        <if test="beginTime != null">
+            AND create_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime != null">
+            AND create_time &lt;= #{endTime}
+        </if>
+        order by create_time desc
+
+    </select>
+
+    <select id="queryPurchaseDetail" parameterType="com.morning.star.retail.facade.dto.purchase.PurchaseQueryDTO"
+            resultType="com.morning.star.retail.facade.dto.purchase.PurchaseOrderDetailDTO">
+        SELECT
+	    T2.*
+        FROM
+	    retail_purchase T1
+        INNER JOIN retail_purchase_item T2 ON T1.purchase_code = T2.purchase_code
+        where T1.delete_flag = 0 AND T2.delete_flag = 0
+        <if test="groupCode != null and groupCode != ''">
+            AND T1.group_code = #{groupCode}
+        </if>
+        <if test="storeCode != null and storeCode != ''">
+            and T1.store_code = #{storeCode}
+        </if>
+        <if test="purchaseCode != null and purchaseCode != ''">
+            and T1.purchase_code like '%${purchaseCode}%'
+        </if>
+        <if test="creator != null and creator != ''">
+            and (T1.creator_id=#{creator} or T1.creator_name like '%${creator}%' )
+        </if>
+        <if test="supplierCode != null and supplierCode != ''">
+            and T1.supplier_code=#{supplierCode}
+        </if>
+        <if test="supplierName != null and supplierName !=''">
+            AND T1.supplier_name like '%${supplierName}%'
+        </if>
+        <if test="status!=null">
+            and T1.status=#{status}
+        </if>
+        <if test="beginTime != null">
+            AND T1.create_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime != null">
+            AND T1.create_time &lt;= #{endTime}
+        </if>
+        order by T1.create_time desc
+
+    </select>
+
+    <select id="queryPurchaseDetailRpt" parameterType="com.morning.star.retail.facade.dto.purchase.PurchaseQueryDTO"
+            resultType="com.morning.star.retail.facade.dto.purchase.PurchaseOrderRptDTO">
+        SELECT
+        b.goods_code,b.product_code,b.product_name,b.upc_code,a.purchase_code,b.units_name,b.create_time AS
+        purchase_time,
+        b.price,b.qty,b.price*b.qty AS amount,d.receipt_code,d.create_time AS
+        receiptTime,c.store_code,c.store_name,d.real_qty AS receiptQty,
+        d.real_amount AS receiptAmount,d.qty-d.real_qty AS noReceiptQty,d.amount-d.real_amount AS
+        noReceiptAmount,c.supplier_code,c.supplier_name,
+        (CASE WHEN c.trans_status=0 THEN '未入库' ELSE '已入库' END) AS statusName,a.remark as memo
+        FROM retail_stock.purchase_order a
+        LEFT JOIN retail_stock.retail_purchase_item b
+        ON a.purchase_code=b.purchase_code
+        LEFT JOIN retail_stock.purchase_receipt_order c
+        ON b.purchase_code=c.purchase_code AND b.store_code=c.store_code
+        LEFT JOIN retail_stock.purchase_receipt_order_detail d
+        ON c.receipt_code=d.receipt_code AND b.goods_code=d.goods_code
+        WHERE a.STATUS>0 and a.delete_flag=0
+        <if test="groupCode != null and groupCode != ''">
+            AND a.group_code = #{groupCode}
+        </if>
+        <if test="storeCode != null and storeCode != ''">
+            and a.store_code = #{storeCode}
+        </if>
+        <if test="purchaseCode != null and purchaseCode != ''">
+            and a.purchase_code like '%${purchaseCode}%'
+        </if>
+        <if test="creator != null and creator != ''">
+            and (a.creator_id=#{creator} or a.creator_name like '%${creator}%' )
+        </if>
+        <if test="supplierCode != null and supplierCode != ''">
+            and a.supplier_code=#{supplierCode}
+        </if>
+        <if test="supplierName != null and supplierName !=''">
+            AND a.supplier_name like '%${supplierName}%'
+        </if>
+        <if test="status!=null and status != ''">
+            and a.status=#{status}
+        </if>
+        <if test="beginTime != null">
+            AND a.create_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime != null">
+            AND a.create_time &lt;= #{endTime}
+        </if>
+
+    </select>
+</mapper>

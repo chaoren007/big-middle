@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.dao.ExportRecordDAO">
+
+    <update id="update" parameterType="com.morning.star.retail.export.dto.ExportRecordDTO">
+        UPDATE `retail_stock`.`retail_export_record`
+        SET
+        <if test="url != null and url != ''">
+            url = #{url},
+        </if>
+        <if test="status != null">
+            status = #{status}
+        </if>
+        WHERE `id`=#{id};
+    </update>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="com.morning.star.retail.export.dto.ExportRecordDTO">
+        INSERT INTO `retail_stock`.`retail_export_record` (`create_time`, `group_code`, `store_code`, `user_id`, `username`,
+        `status`, `type`, `query_str`)
+        VALUES (#{createTime}, #{groupCode}, #{storeCode}, #{userId}, #{username}, #{status}, #{type}, #{queryStr});
+
+    </insert>
+</mapper>

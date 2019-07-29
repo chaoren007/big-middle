@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:provider delay="-1" timeout="6000" retries="0"/>
+
+    <!-- 要暴露的服务接口 -->
+    <dubbo:service interface="com.morning.star.retail.facade.AddressFacade" ref="addressFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.DeviceFacade" ref="deviceFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+
+    <!-- group -->
+    <dubbo:service interface="com.morning.star.retail.facade.GroupFacade" ref="groupFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.StoreFacade" ref="storeFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+
+    <dubbo:service interface="com.morning.star.retail.facade.SupplierFacade" ref="supplierFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.SupplierTypeFacade" ref="supplierTypeFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.SupplierChangeFacade" ref="supplierChangeFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+
+    <!-- warehouse仓库管理 -->
+    <dubbo:service interface="com.morning.star.retail.facade.WarehouseFacade" ref="warehouseFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+
+    <!-- MqError -->
+    <dubbo:service interface="com.morning.star.retail.facade.MqErrorFacade" ref="mqErrorFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+
+    <!-- wms -->
+    <dubbo:service interface="com.morning.star.retail.facade.BaseModelWmsFacade" ref="baseModelWmsFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+
+    <!-- 供货列表 -->
+    <dubbo:service interface="com.morning.star.retail.facade.SupplierGoodsFacade" ref="supplierGoodsFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+
+    <!-- product -->
+    <dubbo:reference interface="com.morning.star.retail.facade.ProductFacade" id="productFacadeImpl"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="30000" check="false"/>
+
+    <dubbo:reference interface="com.morning.star.retail.facade.TopicFacade" id="topicFacade"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="30000" check="false"/>
+
+    <dubbo:reference interface="com.morning.star.retail.admin.facade.AccountFacade" id="accountFacade"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="30000" check="false"/>
+    <dubbo:reference interface="com.morning.star.retail.admin.facade.SupplierAccountFacade" id="supplierAccountFacade"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="30000" check="false"/>
+    <dubbo:reference interface="com.morning.star.retail.order.facade.BusOrderFacade" id="busOrderFacade"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="30000" check="false"/>
+    <dubbo:reference interface="com.morning.star.retail.facade.GoodsSupplyFacade" id="goodsSupplyFacade"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="30000" check="false"/>
+    <dubbo:reference interface="com.morning.star.retail.facade.CategoryFacade" id="categoryFacade"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="30000" check="false"/>
+
+</beans>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+	<dubbo:provider delay="-1" timeout="6000" retries="0" />
+
+
+	<dubbo:reference interface="com.morning.star.retail.order.facade.AfterSalesServiceFacade" id="afterSalesServiceFacade"
+					 group="${dubbo.group}" version="${dubbo.version}" check="false"/>
+	<dubbo:reference interface="com.morning.star.retail.order.facade.RefundServiceFacade" id="refundServiceFacade"
+					 group="${dubbo.group}" version="${dubbo.version}" check="false"/>
+    <dubbo:reference interface="com.morning.star.retail.facade.StockFacade" id="stockFacadeImpl"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="30000" check="false" />
+	<!-- 订单内部调用接口 -->
+	<dubbo:reference interface="com.morning.star.retail.order.facade.OrderServiceFacadeForInner" id="orderServiceFacadeForInner"
+					 group="${dubbo.group}" version="${dubbo.version}" check="false"/>
+
+	<!-- 账期生成 -->
+	<dubbo:reference interface="com.morning.star.retail.order.facade.StatementOrderServiceFacade" id="statementOrderServiceFacade"
+					 group="${dubbo.group}"	 version="${dubbo.version}" check="false"/>
+    <!-- 下架过期活动 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.ActivityFacade" id="activityFacade"
+					 group="${dubbo.group}"	 version="${dubbo.version}" check="false"/>
+</beans>
+
+
+

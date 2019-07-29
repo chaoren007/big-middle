@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:provider delay="-1" timeout="300000" retries="0"/>
+
+    <!-- 要引用的服务 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.StockFacade" id="stockFacadeImpl"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="120000" check="false"></dubbo:reference>
+
+    <!-- 盘点 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.InventoryFacade" id="inventoryFacade"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="120000" check="false"></dubbo:reference>
+
+
+    <!-- 货品 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.ProductFacade" id="productFacade"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="120000" check="false"></dubbo:reference>
+
+    <!-- 商品 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.GoodsAdminFacade" id="goodsAdminFacadeImpl"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="120000" check="false"></dubbo:reference>
+
+    <!-- 门店 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.StoreFacade" id="storeFacadeImpl"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="120000" check="false"></dubbo:reference>
+
+
+</beans>

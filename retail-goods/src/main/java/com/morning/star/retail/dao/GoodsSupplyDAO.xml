@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.dao.GoodsSupplyDAO">
+
+    <select id="page" resultType="com.morning.star.retail.facade.dto.supply.GoodsSupplyDTO"
+            parameterType="com.morning.star.retail.facade.dto.supply.GoodsSupplyQueryDTO">
+        select
+        *
+        from retail_supply_goods
+        <where>
+            delete_flag = 0
+            <if test="groupCode != null and groupCode != ''">
+                and group_code = #{groupCode}
+            </if>
+            <if test="categoryId1 != null">
+                and category_id1 = #{categoryId1}
+            </if>
+            <if test="categoryId2 != null">
+                and category_id2 = #{categoryId2}
+            </if>
+            <if test="categoryId3 != null">
+                and category_id3 = #{categoryId3}
+            </if>
+            <if test="brandId != null">
+                and brand_id = #{brandId}
+            </if>
+            <if test="cityId != null and cityId != ''">
+                and supply_city_ids like '%${cityId}%'
+            </if>
+            <if test="supplierCode != null and supplierCode != ''">
+                and supplier_code = #{supplierCode}
+            </if>
+            <if test="commodityType != null">
+                and commodity_type = #{commodityType}
+            </if>
+            <if test="productCode != null and productCode != ''">
+                and product_code like '%${productCode}%'
+            </if>
+            <if test="upcCode != null and upcCode != ''">
+                and upc_code like '%${upcCode}%'
+            </if>
+            <if test="productName != null and productName != ''">
+                and product_name like '%${productName}%'
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                and supplier_name like '%${supplierName}%'
+            </if>
+            <if test="mainSpu != null and mainSpu != ''">
+                and main_spu = #{mainSpu}
+            </if>
+            <if test="productType != null and productType != ''">
+                and product_type = #{productType}
+            </if>
+            <if test="supplyStatus != null and supplyStatus.size() > 0">
+                and supply_status in
+                <foreach collection="supplyStatus" item="item" index="index" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+</mapper>

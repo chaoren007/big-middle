@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.star.retail.stock.dao.SupplierStockRecordDAO" >
+
+  <sql id="Base_Column" >
+    id, company_code, store_code, order_code, goods_code, goods_name, supplier_code,
+    supplier_name, upc_code, sales_type, num, units, wait_in_stock_num, done_in_stock_num,
+    used_stock_num, pre_stock_num, wait_out_stock_num, done_out_stock_num, goods_type, 
+    spec_num, spec_units, type, status, create_time, modify_time, operator_id, operator_name
+  </sql>
+
+  <insert id="insert" parameterType="com.morning.star.retail.stock.bean.SupplierStockRecordDO" >
+    insert into retail_supplier_stock_record (company_code, store_code,
+      order_code, goods_code, goods_name,
+      supplier_code, supplier_name, upc_code,
+      sales_type, num, units, 
+      wait_in_stock_num, done_in_stock_num, used_stock_num, 
+      pre_stock_num, wait_out_stock_num, done_out_stock_num, 
+      goods_type, spec_num, spec_units, 
+      type, status, create_time, 
+      modify_time, operator_id, operator_name
+      )
+    values (#{companyCode}, #{storeCode},
+      #{orderCode}, #{goodsCode}, #{goodsName},
+      #{supplierCode}, #{supplierName}, #{upcCode},
+      #{salesType}, #{num}, #{units}, 
+      #{waitInStockNum}, #{doneInStockNum}, #{usedStockNum}, 
+      #{preStockNum}, #{waitOutStockNum}, #{doneOutStockNum}, 
+      #{goodsType}, #{specNum}, #{specUnits}, 
+      #{type}, #{status}, SYSDATE,
+      SYSDATE, #{operatorId}, #{operatorName}
+      )
+  </insert>
+
+</mapper>

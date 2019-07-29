@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.morning.star.retail</groupId>
+	<artifactId>retail-admin-god-acc</artifactId>
+    <version>4.0.4-SNAPSHOT</version>
+
+	<parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.6.RELEASE</version>
+    </parent>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+		<!-- Spring Boot Web 依赖 -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-base-server</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <!-- 其他 -->
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-base-info-api</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-admin-api</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-order-api</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-stock-api</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-marketing-api</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.central</groupId>
+            <artifactId>central-open-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>com.morning.star</artifactId>
+                    <groupId>base-util</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.venus</groupId>
+            <artifactId>venus-open-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.morning.star.retail</groupId>
+            <artifactId>retail-shiro</artifactId>
+            <version>4.0.4-SNAPSHOT</version>
+        </dependency>
+
+        <!-- spring test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- swagger ui -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+    </dependencies>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Edgware.SR2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+	<build>
+	    <finalName>retail-admin-god-acc</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

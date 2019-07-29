@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.stock.dao.ReplenishDao">
+    <select id="queryPage" parameterType="com.morning.star.retail.facade.dto.replenish.ReplenishQueryDTO"
+            resultType="com.morning.star.retail.facade.dto.replenish.ReplenishDTO">
+        select *
+        from retail_replenish
+        where delete_flag = 0
+        <if test="groupCode != null and groupCode != ''">
+            and group_code = #{groupCode}
+        </if>
+        <if test="storeCode != null and storeCode != ''">
+            and store_code = #{storeCode}
+        </if>
+        <if test="cityId != null">
+            and  city_id = #{cityId}
+        </if>
+        <if test="replenishCode != null and replenishCode != ''">
+            and replenish_code like '%${replenishCode}%'
+        </if>
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+        <if test="startTime != null">
+            and create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            and create_time &lt;= #{endTime}
+        </if>
+        order by create_time desc
+    </select>
+
+</mapper>

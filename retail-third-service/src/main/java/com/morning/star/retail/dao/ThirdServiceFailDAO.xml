@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.dao.ThirdServiceFailDAO">
+
+    <select id="queryByPage" parameterType="com.morning.star.retail.facade.dto.ThirdServiceQueryDTO"
+            resultType="com.morning.star.retail.facade.dto.ThirdServiceFailDTO">
+        select *
+        from retail_third_service_fail
+        where delete_flag = 0
+        <if test="requestType != null and requestType != ''">
+            and request_type = #{requestType}
+        </if>
+        <if test="requestTag != null and requestTag != ''">
+            and request_tag = #{requestTag}
+        </if>
+        <if test="requestStatus != null and requestStatus != ''">
+            and request_status = #{requestStatus}
+        </if>
+        order by create_time
+    </select>
+</mapper>

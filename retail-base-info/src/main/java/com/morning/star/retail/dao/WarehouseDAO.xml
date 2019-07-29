@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.dao.WarehouseDAO">
+    <select id="list" parameterType="com.morning.star.retail.dto.WarehouseQueryDTO"
+            resultType="com.morning.star.retail.dto.WarehouseDTO">
+        select warehouse_name,warehouse_code,city,city_id,store_code,group_code,warehouse_address,create_name,tel,remark
+        from retail_store_warehouse
+        where delete_flag != 1
+        <if test="storeCode != null and storeCode != ''">
+            and store_code = #{storeCode}
+        </if>
+        <if test="groupCode != null and groupCode != ''">
+            and group_code = #{groupCode}
+        </if>
+        <if test="city != null and city != ''">
+            and city = #{city}
+        </if>
+        <if test="warehouseName != null and warehouseName != ''">
+            and warehouse_name = #{warehouseName}
+        </if>
+        <if test="warehouseCode != null and warehouseCode != ''">
+            and warehouse_code = #{warehouseCode}
+        </if>
+
+
+    </select>
+
+    <select id="listcity"  parameterType="java.lang.String"
+            resultType="com.morning.star.retail.dto.WarehouseDTO">
+        select city,city_id from retail_store_warehouse
+        where delete_flag!=1 and group_code = #{groupCode}
+        group by city_id
+    </select>
+
+    <select id="listWarehouse" parameterType="com.morning.star.retail.dto.WarehouseQueryDTO"  resultType="com.morning.star.retail.dto.WarehouseDTO">
+       select warehouse_name,warehouse_code from retail_store_warehouse
+        where delete_flag!=1 and city_id=#{cityId} and group_code = #{groupCode}
+    </select>
+</mapper>

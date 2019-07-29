@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.star.retail.dao.DeviceDAO">
+    <sql id="Base_Column_List">
+        id, create_time, delete_flag, modify_time, operator_id, operator_name, 
+        activity_time, device_id, device_version, expire_date, group_code, group_name, 
+        last_heartbeat_time, last_login_time, last_reg_time, remark, secret_key, 
+        software_version, status, store_code, store_name
+    </sql>
+
+    <select id="getDeviceByDeviceId" resultType="com.morning.star.retail.dto.DeviceInfoDTO">
+        select
+        <include refid="Base_Column_List"/>
+        from retail_device
+        <where>
+                device_id = #{deviceId}
+        </where>
+    </select>
+    <select id="getDeviceBySecretKey" resultType="com.morning.star.retail.dto.DeviceInfoDTO">
+        select
+        <include refid="Base_Column_List"/>
+        from retail_device
+        <where>
+                secret_key = #{secretKey}
+        </where>
+    </select>
+    
+    <select id="selectAll" resultType="com.morning.star.retail.dto.DeviceInfoDTO" 
+                parameterType="com.morning.star.retail.dto.QueryPageDeviceDTO">
+        select
+        <include refid="Base_Column_List"/>
+        from retail_device
+        <where>
+            <if test="groupCode != null and groupCode !=''">
+                AND group_code = #{groupCode}
+            </if>
+            <if test="groupName != null and groupName != ''">
+                AND group_name LIKE '%${groupName}%'
+            </if>
+            <if test="storeCode != null and storeCode != ''">
+                and store_code = #{storeCode}
+            </if>
+            <if test="storeName != null and storeName != ''">
+                AND store_name LIKE '%${storeName}%'
+            </if>
+            <if test="deviceId != null and deviceId != ''">
+                and device_id = #{deviceId}
+            </if>
+            <if test="secretKey != null and secretKey != ''">
+                and secret_key = #{secretKey}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="state != null">
+                <if test="state == 1">
+                    AND group_code IS NULL
+                </if>
+                <if test="state == 2">
+                    AND group_code IS NOT NULL
+                </if>
+                <if test="state == 3">
+                    AND store_code IS NULL
+                </if>
+                <if test="state == 4">
+                    AND store_code IS NOT NULL
+                </if>
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+</mapper>

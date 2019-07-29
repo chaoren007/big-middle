@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.stock.dao.PurchaseOrderDetailDAO">
+    <select id="queryDetail" parameterType="com.morning.star.retail.facade.dto.purchase.PurchaseQueryDTO"
+            resultType="com.morning.star.retail.facade.dto.purchase.PurchaseOrderDetailDTO">
+        select purchase_code,receipt_code,city_id, city_name,store_code,store_name,
+        warehouse_city_id, warehouse_city_name, warehouse_code, warehouse_name,
+        product_code,product_name,goods_code,upc_code,units_id,units_name,original_price,qty,price,rate_price,tax_rate,
+        amount,rate_amount,create_time,spu_info,remark,pack_spec,
+        IFNULL(modify_Time,create_time) as modify_time,operator_Id,operator_Name
+        from retail_purchase_item
+        where 1=1
+        <if test="purchaseCode != null and purchaseCode != ''">
+            and purchase_code =#{purchaseCode}
+        </if>
+    </select>
+</mapper>

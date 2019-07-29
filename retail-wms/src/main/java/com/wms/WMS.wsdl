@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://service.com" xmlns:ax21="http://vo.wms.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" targetNamespace="http://service.com">
+    <wsdl:documentation>WMS</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax22="http://vo.wms.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.com">
+            <xs:import namespace="http://vo.wms.com/xsd"/>
+            <xs:element name="Updatedocmx">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="ax21:Getorderdet"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="UpdatedocmxResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Remsg"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreatePutorder">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="ax21:Putorder"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="list2" nillable="true" type="ax21:Putorderdet"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreatePutorderResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Remsg"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreatePartner">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="ax21:Partner"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreatePartnerResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Remsg"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreateMove">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="ax21:Getorder"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="list2" nillable="true" type="ax21:Getorderdet"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreateMoveResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Remsg"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreateGoodsType">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="ax21:GoodsType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreateGoodsTypeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Remsg"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreateGoods">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="ax21:Goods"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreateGoodsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Remsg"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreateGetorder">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="ax21:Getorder"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="list2" nillable="true" type="ax21:Getorderdet"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="list3" nillable="true" type="ax21:Getorderdet"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreateGetorderResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Remsg"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreateDept">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="ax21:Dept"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreateDeptResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Remsg"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://vo.wms.com/xsd">
+            <xs:complexType name="Getorderdet">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ERPID" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="MSGID" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="apptype" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="barcode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="batchid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="batchno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="blargess" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="closeflag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="crowno" type="xs:int"/>
+                    <xs:element minOccurs="0" name="custno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="customer" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="custprd" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="iamt" type="xs:double"/>
+                    <xs:element minOccurs="0" name="incode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="inprc" type="xs:double"/>
+                    <xs:element minOccurs="0" name="instore" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="invcode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jbdw" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lastdate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ordertype" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="outstore" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="packqty" type="xs:double"/>
+                    <xs:element minOccurs="0" name="packs" type="xs:double"/>
+                    <xs:element minOccurs="0" name="packunit" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="producedate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="purcode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="qty" type="xs:double"/>
+                    <xs:element minOccurs="0" name="rdname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="specs" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sqty" type="xs:double"/>
+                    <xs:element minOccurs="0" name="supplyno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="unit" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="whid" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Remsg">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="dataList" nillable="true" type="ax21:msg"/>
+                    <xs:element minOccurs="0" name="msgid" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="msg">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ifflg" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ifmsg" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="keydata" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="result" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="status" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Putorder">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ERPID" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="bookdate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="booktime" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="clientno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="closeflag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="custno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="custprd" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deptid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="hzstat" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="invpos" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="itemcode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="linkaddree" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="linkman" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="linkphone" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="odrtyp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="offstat" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="operater" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="orderno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ordertype" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="overout" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="paytype" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="prcn" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="printflag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="pscode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="purdate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="purtime" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="puttype" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="qcflag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="remark" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="repno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="resonname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="resontype" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="shortout" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="stat" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="storeno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="werks" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="xpflag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ycstoreno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="yrstoreno" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Putorderdet">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ERPID" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="PSCODE" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="PSID" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="barcode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="bitem" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cgeneralbid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="custno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="custprd" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gdsproperty" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="hprc" type="xs:double"/>
+                    <xs:element minOccurs="0" name="incode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jbdw" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mocode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="modid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="orderno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="packqty" type="xs:double"/>
+                    <xs:element minOccurs="0" name="packs" type="xs:double"/>
+                    <xs:element minOccurs="0" name="packunit" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="pincode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="qty" type="xs:double"/>
+                    <xs:element minOccurs="0" name="sqty" type="xs:double"/>
+                    <xs:element minOccurs="0" name="stat" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="storcode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="storeno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="tld" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="uncode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="unit" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="zphzstat" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Partner">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="age" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="birthday" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="custno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deptno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="partner_address" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="partner_group" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="partner_linman" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="partner_lxr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="partner_name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="partner_no" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="partner_order" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="partner_psid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="partner_pym" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="partner_tel" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="partner_type" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sex" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="storeno" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Getorder">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ERPID" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="address" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="allcount" type="xs:int"/>
+                    <xs:element minOccurs="0" name="appno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="apptype" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="billtype" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="closeflag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cust_tel" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="custno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="customer" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="custprd" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deptid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="faxnum" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gettype" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="iamt" type="xs:double"/>
+                    <xs:element minOccurs="0" name="inprc" type="xs:double"/>
+                    <xs:element minOccurs="0" name="isyk" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="itemcode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lease" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="operater" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="opertime" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ordertype" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="otherwhid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="paytype" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="pcn" type="xs:int"/>
+                    <xs:element minOccurs="0" name="post" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="predate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="prefpware" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="pretime" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="printflag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="purcode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="purdate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="qcflag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="rdname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="receflag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="recetime" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="remark" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="serial_no" type="xs:int"/>
+                    <xs:element minOccurs="0" name="stat" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="stkqty" type="xs:double"/>
+                    <xs:element minOccurs="0" name="storeno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="supplyname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="supplyno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="tel" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="werks" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="whid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ycstore" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="yrstore" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GoodsType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="code" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="custno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="islast" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lastcode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lv" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Goods">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="FModifyTime" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="PROPORTION" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="barcode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="brand" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="bzq" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="checkflag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="checkmode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="clflag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="custno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="descflag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dosekind" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fresh_check" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gatherlv" type="xs:double"/>
+                    <xs:element minOccurs="0" name="goods_abc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="goods_flag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="goods_high" type="xs:double"/>
+                    <xs:element minOccurs="0" name="goods_long" type="xs:double"/>
+                    <xs:element minOccurs="0" name="goods_weight" type="xs:double"/>
+                    <xs:element minOccurs="0" name="goods_width" type="xs:double"/>
+                    <xs:element minOccurs="0" name="incode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="indate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="intime" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jbdw" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lot2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="manufacturer" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="maxrackfloor" type="xs:int"/>
+                    <xs:element minOccurs="0" name="midpackqty" type="xs:int"/>
+                    <xs:element minOccurs="0" name="minpackqty" type="xs:double"/>
+                    <xs:element minOccurs="0" name="minrackfloor" type="xs:int"/>
+                    <xs:element minOccurs="0" name="msgid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="origin" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="packbarcode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="packqty" type="xs:double"/>
+                    <xs:element minOccurs="0" name="packunit" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="passno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="picklv" type="xs:double"/>
+                    <xs:element minOccurs="0" name="pname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="pym" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="recipe" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="spackqty" type="xs:double"/>
+                    <xs:element minOccurs="0" name="specs" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="storeno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="type" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="uncode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="unit" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="usekind" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Dept">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="custno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deptname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deptno" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="memo" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="CreateMoveRequest">
+        <wsdl:part name="parameters" element="ns:CreateMove"/>
+    </wsdl:message>
+    <wsdl:message name="CreateMoveResponse">
+        <wsdl:part name="parameters" element="ns:CreateMoveResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CreatePutorderRequest">
+        <wsdl:part name="parameters" element="ns:CreatePutorder"/>
+    </wsdl:message>
+    <wsdl:message name="CreatePutorderResponse">
+        <wsdl:part name="parameters" element="ns:CreatePutorderResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CreateGoodsRequest">
+        <wsdl:part name="parameters" element="ns:CreateGoods"/>
+    </wsdl:message>
+    <wsdl:message name="CreateGoodsResponse">
+        <wsdl:part name="parameters" element="ns:CreateGoodsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CreateDeptRequest">
+        <wsdl:part name="parameters" element="ns:CreateDept"/>
+    </wsdl:message>
+    <wsdl:message name="CreateDeptResponse">
+        <wsdl:part name="parameters" element="ns:CreateDeptResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CreatePartnerRequest">
+        <wsdl:part name="parameters" element="ns:CreatePartner"/>
+    </wsdl:message>
+    <wsdl:message name="CreatePartnerResponse">
+        <wsdl:part name="parameters" element="ns:CreatePartnerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CreateGoodsTypeRequest">
+        <wsdl:part name="parameters" element="ns:CreateGoodsType"/>
+    </wsdl:message>
+    <wsdl:message name="CreateGoodsTypeResponse">
+        <wsdl:part name="parameters" element="ns:CreateGoodsTypeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="UpdatedocmxRequest">
+        <wsdl:part name="parameters" element="ns:Updatedocmx"/>
+    </wsdl:message>
+    <wsdl:message name="UpdatedocmxResponse">
+        <wsdl:part name="parameters" element="ns:UpdatedocmxResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CreateGetorderRequest">
+        <wsdl:part name="parameters" element="ns:CreateGetorder"/>
+    </wsdl:message>
+    <wsdl:message name="CreateGetorderResponse">
+        <wsdl:part name="parameters" element="ns:CreateGetorderResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="WMSPortType">
+        <wsdl:operation name="CreateMove">
+            <wsdl:input message="ns:CreateMoveRequest" wsaw:Action="urn:CreateMove"/>
+            <wsdl:output message="ns:CreateMoveResponse" wsaw:Action="urn:CreateMoveResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePutorder">
+            <wsdl:input message="ns:CreatePutorderRequest" wsaw:Action="urn:CreatePutorder"/>
+            <wsdl:output message="ns:CreatePutorderResponse" wsaw:Action="urn:CreatePutorderResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreateGoods">
+            <wsdl:input message="ns:CreateGoodsRequest" wsaw:Action="urn:CreateGoods"/>
+            <wsdl:output message="ns:CreateGoodsResponse" wsaw:Action="urn:CreateGoodsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreateDept">
+            <wsdl:input message="ns:CreateDeptRequest" wsaw:Action="urn:CreateDept"/>
+            <wsdl:output message="ns:CreateDeptResponse" wsaw:Action="urn:CreateDeptResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePartner">
+            <wsdl:input message="ns:CreatePartnerRequest" wsaw:Action="urn:CreatePartner"/>
+            <wsdl:output message="ns:CreatePartnerResponse" wsaw:Action="urn:CreatePartnerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreateGoodsType">
+            <wsdl:input message="ns:CreateGoodsTypeRequest" wsaw:Action="urn:CreateGoodsType"/>
+            <wsdl:output message="ns:CreateGoodsTypeResponse" wsaw:Action="urn:CreateGoodsTypeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="Updatedocmx">
+            <wsdl:input message="ns:UpdatedocmxRequest" wsaw:Action="urn:Updatedocmx"/>
+            <wsdl:output message="ns:UpdatedocmxResponse" wsaw:Action="urn:UpdatedocmxResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreateGetorder">
+            <wsdl:input message="ns:CreateGetorderRequest" wsaw:Action="urn:CreateGetorder"/>
+            <wsdl:output message="ns:CreateGetorderResponse" wsaw:Action="urn:CreateGetorderResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WMSSoap11Binding" type="ns:WMSPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="CreateMove">
+            <soap:operation soapAction="urn:CreateMove" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePutorder">
+            <soap:operation soapAction="urn:CreatePutorder" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateGoods">
+            <soap:operation soapAction="urn:CreateGoods" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateDept">
+            <soap:operation soapAction="urn:CreateDept" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePartner">
+            <soap:operation soapAction="urn:CreatePartner" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateGoodsType">
+            <soap:operation soapAction="urn:CreateGoodsType" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Updatedocmx">
+            <soap:operation soapAction="urn:Updatedocmx" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateGetorder">
+            <soap:operation soapAction="urn:CreateGetorder" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WMSSoap12Binding" type="ns:WMSPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="CreateMove">
+            <soap12:operation soapAction="urn:CreateMove" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePutorder">
+            <soap12:operation soapAction="urn:CreatePutorder" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateGoods">
+            <soap12:operation soapAction="urn:CreateGoods" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateDept">
+            <soap12:operation soapAction="urn:CreateDept" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePartner">
+            <soap12:operation soapAction="urn:CreatePartner" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateGoodsType">
+            <soap12:operation soapAction="urn:CreateGoodsType" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Updatedocmx">
+            <soap12:operation soapAction="urn:Updatedocmx" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateGetorder">
+            <soap12:operation soapAction="urn:CreateGetorder" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WMSHttpBinding" type="ns:WMSPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="CreateMove">
+            <http:operation location="CreateMove"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePutorder">
+            <http:operation location="CreatePutorder"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateGoods">
+            <http:operation location="CreateGoods"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateDept">
+            <http:operation location="CreateDept"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePartner">
+            <http:operation location="CreatePartner"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateGoodsType">
+            <http:operation location="CreateGoodsType"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Updatedocmx">
+            <http:operation location="Updatedocmx"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateGetorder">
+            <http:operation location="CreateGetorder"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WMS">
+        <wsdl:port name="WMSHttpSoap11Endpoint" binding="ns:WMSSoap11Binding">
+            <soap:address location="http://182.254.227.113:8081/WMSServicePortForNWN/services/WMS.WMSHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WMSHttpSoap12Endpoint" binding="ns:WMSSoap12Binding">
+            <soap12:address location="http://182.254.227.113:8081/WMSServicePortForNWN/services/WMS.WMSHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="WMSHttpEndpoint" binding="ns:WMSHttpBinding">
+            <http:address location="http://182.254.227.113:8081/WMSServicePortForNWN/services/WMS.WMSHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

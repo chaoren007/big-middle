@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.star.retail.admin.dao.ClerkShiftRecordDAO" >
+
+  <sql id="shiftRecordSql">
+    (company_code,store_code,surrender_account,surrender_name,
+     receiver_account,receiver_name,handover_time,cash)
+  </sql>
+
+  <insert id="insert" parameterType="com.morning.star.retail.admin.bean.ClerkShiftDO" useGeneratedKeys="true">
+    insert into clerk_shift_record
+    <include refid="shiftRecordSql"/>
+    values (#{companyCode},#{storeCode},#{surrenderAccount},
+    #{surrenderName},#{receiverAccount},#{receiverName},#{handoverTime},#{cash})
+  </insert>
+
+  <select id="query" resultType="com.morning.star.retail.admin.vo.ClerkShiftVO" parameterType="com.morning.star.retail.admin.bo.ClerkShiftBO">
+    SELECT * FROM clerk_shift_record
+    <where>
+      <if test="companyCode != null">
+        company_code = #{companyCode}
+      </if>
+      <if test="storeCode != null">
+        AND  store_code = #{storeCode}
+      </if>
+      <if test="account != null">
+        AND  (surrender_account = #{account} OR receiver_account = #{account})
+      </if>
+      <choose>
+        <when test="orderFiled != null">
+          ORDER BY ${orderFiled}
+        </when>
+        <otherwise>
+          ORDER BY handover_time DESC
+        </otherwise>
+      </choose>
+    </where>
+  </select>
+
+</mapper>

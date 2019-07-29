@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.stock.dao.StockDetailDAO">
+    <resultMap id="StockDetailResult" type="com.morning.star.retail.stock.bean.StockDetailDO">
+        <id column="findex" jdbcType="VARCHAR" property="findex" />
+        <result column="id" jdbcType="VARCHAR" property="id" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="company_code" jdbcType="VARCHAR" property="companyCode" />
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+        <result column="goods_id" jdbcType="VARCHAR" property="goodsId" />
+        <result column="goods_unit" jdbcType="VARCHAR" property="goodsUnit" />
+        <result column="goods_spec" jdbcType="VARCHAR" property="goodsSpec" />
+        <result column="serial_id" jdbcType="VARCHAR" property="serialId" />
+        <result column="bar_code" jdbcType="VARCHAR" property="barCode" />
+        <result column="purchase_id" jdbcType="VARCHAR" property="purchaseId" />
+        <result column="replenish_id" jdbcType="VARCHAR" property="replenishId" />
+        <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice" />
+        <result column="in_id" jdbcType="VARCHAR" property="inId" />
+        <result column="in_type" jdbcType="TINYINT" property="inType" />
+        <result column="in_operator" jdbcType="VARCHAR" property="inOperator" />
+        <result column="in_operator_name" jdbcType="VARCHAR" property="inOperatorName" />
+        <result column="in_time" jdbcType="TIMESTAMP" property="inTime" />
+        <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="logistics_id" jdbcType="VARCHAR" property="logisticsId" />
+        <result column="selling_price" jdbcType="DECIMAL" property="sellingPrice" />
+        <result column="sales_price" jdbcType="DECIMAL" property="salesPrice" />
+        <result column="out_type" jdbcType="TINYINT" property="outType" />
+        <result column="out_operator" jdbcType="VARCHAR" property="outOperator" />
+        <result column="out_operator_name" jdbcType="VARCHAR" property="outOperatorName" />
+        <result column="out_time" jdbcType="TIMESTAMP" property="outTime" />
+        <result column="provider" jdbcType="VARCHAR" property="provider" />
+        <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
+        <result column="store_id" jdbcType="VARCHAR" property="storeId" />
+        <result column="operator" jdbcType="VARCHAR" property="operator" />
+        <result column="operator_name" jdbcType="VARCHAR" property="operatorName" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    </resultMap>
+
+	<insert id="save" parameterType="com.morning.star.retail.stock.bean.StockDetailDO" useGeneratedKeys="true" keyProperty="findex">
+		INSERT INTO stock_detail
+		  (<include refid="StockDetailColumnsWithoutFindex" />) 
+		VALUES (#{id}, #{status}, #{companyCode}, #{goodsName}, #{goodsId}, #{goodsUnit}, #{goodsSpec}, #{serialId}, #{barCode},
+            #{purchaseId}, #{replenishId}, #{purchasePrice}, #{inId}, #{inType}, #{inOperator}, #{inOperatorName}, #{inTime},
+            #{orderId}, #{logisticsId}, #{sellingPrice}, #{salesPrice}, #{outType}, #{outOperator}, #{outOperatorName}, #{outTime},
+            #{provider}, #{providerName}, #{storeId}, #{operator}, #{operatorName}, #{createTime}, #{modifyTime})
+	</insert>
+	<insert id="saveWater" parameterType="com.morning.star.retail.stock.bean.StockDetailDO">
+	    INSERT INTO stock_detail_water
+          (<include refid="StockDetailColumnsWithoutFindex" />) 
+        VALUES (#{id}, #{status}, #{companyCode}, #{goodsName}, #{goodsId}, #{goodsUnit}, #{goodsSpec}, #{serialId}, #{barCode},
+            #{purchaseId}, #{replenishId}, #{purchasePrice}, #{inId}, #{inType}, #{inOperator}, #{inOperatorName}, #{inTime},
+            #{orderId}, #{logisticsId}, #{sellingPrice}, #{salesPrice}, #{outType}, #{outOperator}, #{outOperatorName}, #{outTime},
+            #{provider}, #{providerName}, #{storeId}, #{operator}, #{operatorName}, #{createTime}, #{modifyTime})
+	</insert>
+	<update id="update" parameterType="com.morning.star.retail.stock.bean.StockDetailDO">
+        UPDATE stock_detail SET
+            status=#{status}, bar_code=#{barCode}, purchase_id=#{purchaseId}, replenish_id=#{replenishId}, purchase_price=#{purchasePrice},
+            in_id=#{inId}, in_type=#{inType}, in_operator=#{inOperator}, in_operator_name=#{inOperatorName}, in_time=#{inTime},
+            order_id=#{orderId}, logistics_id=#{logisticsId}, selling_price=#{sellingPrice}, sales_price=#{salesPrice},
+            out_type=#{outType}, out_operator=#{outOperator}, out_operator_name=#{outOperatorName}, out_time=#{outTime},
+            operator=#{operator}, operator_name=#{operatorName}, modify_time=#{modifyTime}
+        WHERE findex=#{findex}
+    </update>
+	<select id="findOne" resultMap="StockDetailResult">
+        SELECT
+            findex, <include refid="StockDetailColumnsWithoutFindex" />
+        FROM stock_detail
+        WHERE company_code=#{companyCode} AND store_id=#{storeId} AND status=#{status} AND goods_id=#{goodsId}
+        limit 1
+    </select>
+	<select id="findBySerialId" resultMap="StockDetailResult">
+        SELECT
+            findex, <include refid="StockDetailColumnsWithoutFindex" />
+        FROM stock_detail
+        WHERE company_code=#{companyCode} AND store_id=#{storeId} AND serial_id=#{serialId}
+    </select>
+    
+    <sql id="StockDetailColumnsWithoutFindex">
+        id, status, company_code, goods_name, goods_id ,goods_unit,goods_spec,serial_id,bar_code,
+            purchase_id,replenish_id,purchase_price,in_id,in_type,in_operator,in_operator_name,in_time,
+            order_id,logistics_id,selling_price,sales_price,out_type,out_operator,out_operator_name,out_time,
+            provider,provider_name,store_id,operator,operator_name,create_time,modify_time
+    </sql>
+</mapper>

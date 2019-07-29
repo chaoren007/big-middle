@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.morning.star.retail</groupId>
+    <artifactId>retail-aggregation</artifactId>
+    <packaging>pom</packaging>
+    <version>4.0.4-SNAPSHOT</version>
+
+    <modules>
+	    <module>retail-common</module>
+        <module>retail-base-util</module>
+        <!--<module>retail-thread-info</module>-->
+        <module>retail-stock-api</module>
+        <module>retail-base-info-api</module>
+        <module>retail-base-server</module>
+        <module>retail-order-api</module>
+        <module>retail-admin-api</module>
+        <module>retail-pay-api</module>
+        <module>retail-goods-api</module>
+        <module>retail-shiro</module>
+		<module>retail-push-msg-api</module>
+        <module>retail-export-jar</module>
+
+        <module>spring-boot-starter-cache</module>
+        <module>spring-boot-starter-dubbo</module>
+        <module>spring-boot-starter-log</module>
+        <module>spring-boot-starter-mybatis</module>
+        <module>spring-boot-starter-openfalcon</module>
+        <module>spring-boot-starter-redis</module>
+		<module>spring-boot-starter-druid</module>
+        <module>retail-third-service-api</module>
+        <module>retail-wms</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:consumer timeout="300000" />
+
+    <!-- account -->
+    <dubbo:reference
+            interface="com.morning.star.retail.admin.facade.AccountFacade"
+            id="accountFacade" group="${dubbo.group}" version="${dubbo.version}"
+            timeout="30000" check="false" ></dubbo:reference>
+    <dubbo:reference
+            interface="com.morning.star.retail.admin.facade.SupplierAccountFacade"
+            id="supplierAccountFacade" group="${dubbo.group}" version="${dubbo.version}"
+            timeout="30000" check="false"></dubbo:reference>
+
+
+    <dubbo:reference interface="com.morning.star.retail.facade.BrandFacade"
+                     id="brandFacade" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"></dubbo:reference>
+
+    <dubbo:reference interface="com.morning.star.retail.facade.UnitsFacade"
+                     id="unitsFacade" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"></dubbo:reference>
+
+
+    <dubbo:reference interface="com.morning.star.retail.facade.AddressFacade"
+                     id="addressFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"/>
+
+    <!-- resource -->
+    <dubbo:reference
+            interface="com.morning.star.retail.admin.facade.ResourceFacade"
+            id="resourceFacade" group="${dubbo.group}" version="${dubbo.version}"
+            timeout="30000" check="false"/>
+    <!-- role -->
+    <dubbo:reference
+            interface="com.morning.star.retail.admin.facade.RoleFacade"
+            id="roleFacade" group="${dubbo.group}" version="${dubbo.version}"
+            timeout="30000" check="false"/>
+
+    <!-- 供应商 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.SupplierFacade"
+                     id="supplierFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"/>
+
+    <!-- 分类 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.CategoryFacade"
+                     id="categoryFacade" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"></dubbo:reference>
+
+
+    <!-- 门店 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.StoreFacade"
+                     id="storeFacade" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"></dubbo:reference>
+
+    <!-- 商品 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.GoodsSupplyFacade"
+                     id="goodsSupplyFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"/>
+
+    <!-- 运营端供货列表 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.SupplierGoodsFacade"
+                     id="supplierGoodsFacade" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"/>
+    <!-- 运营端供货列表 -->
+    <dubbo:reference interface="com.morning.star.retail.order.facade.BusAfterSalesServiceFacade"
+                     id="busAfterSalesServiceFacade" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"/>
+    <dubbo:reference interface="com.morning.star.retail.order.facade.OrderFacade"
+                     id="orderFacade" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"/>
+
+    <!--集团-->
+    <dubbo:reference interface="com.morning.star.retail.facade.GroupFacade"
+            id="groupFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"
+            timeout="30000" check="false"></dubbo:reference>
+
+
+</beans>

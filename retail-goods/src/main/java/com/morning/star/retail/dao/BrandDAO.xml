@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.dao.BrandDAO">
+    <sql id="base_cloumn">
+		id, create_time, delete_flag,modify_time,
+		operator_id,
+		operator_name,brand_name,en_brand_name,url,category_id,category_name
+	</sql>
+
+    <sql id="base_where">
+        <where>
+            <if test="brandName != null and brandName !=''">
+                and brand_name = #{brandName}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="categoryId != null">
+                and category_id like  '%${categoryId}%'
+            </if>
+            and delete_flag = 0
+        </where>
+    </sql>
+
+
+    <select id="queryList" parameterType="com.morning.star.retail.facade.dto.BrandQueryDTO"
+            resultType="com.morning.star.retail.facade.dto.BrandDTO">
+        select
+        <include refid="base_cloumn" />
+        from retail_brand
+        <include refid="base_where" />
+        order by id desc
+    </select>
+
+    <select id="queryPage" parameterType="com.morning.star.retail.facade.dto.BrandQueryDTO"
+            resultType="com.morning.star.retail.facade.dto.BrandDTO">
+        select
+        <include refid="base_cloumn" />
+        from retail_brand
+        <include refid="base_where" />
+        order by id desc
+    </select>
+</mapper>

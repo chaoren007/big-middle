@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.dao.CategoryDAO">
+    <sql id="base_where">
+        <where>
+            <if test="categoryId != null and categoryId > 0">
+                and category_id = #{categoryId}
+            </if>
+            <if test="categoryName != null and categoryName != ''">
+                and category_name =#{categoryName}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            and delete_flag = 0
+        </where>
+    </sql>
+
+    <select id="getMaxSort" resultType="Integer">
+		select CASE WHEN MAX(sort) IS
+		NULL THEN 0 ELSE MAX(sort) END AS sort
+		from retail_category where
+		parent_id=#{parentId}
+	</select>
+
+    <select id="queryList" parameterType="com.morning.star.retail.facade.dto.CategoryQueryDTO"
+            resultType="com.morning.star.retail.facade.dto.CategoryDTO">
+        select category_id, create_time, delete_flag, modify_time,
+        operator_id, operator_name, category_name, clevel, parent_id,
+        sort, weight ,url ,max_commission ,min_commission
+        from retail_category
+        <include refid="base_where"/>
+        order by weight desc, category_id asc
+    </select>
+    <select id="getByCategoryId" resultType="com.morning.star.retail.facade.dto.CategoryDTO">
+		select category_id, create_time,
+		delete_flag, modify_time,
+		operator_id, operator_name,
+		category_name, clevel, parent_id,
+		sort, weight
+		from
+		retail_category
+		where category_id=#{categoryId}
+	</select>
+
+    <select id="getByCategoryName" parameterType="com.morning.star.retail.facade.dto.CategoryQueryDTO"
+            resultType="com.morning.star.retail.facade.dto.CategoryDTO">
+		select category_id, create_time, delete_flag, modify_time,
+		operator_id, operator_name, category_name, clevel, parent_id,
+		sort, weight ,url ,max_commission ,min_commission
+		from
+		retail_category
+		where category_name like '%${categoryName}%'
+		and clevel = 3 and delete_flag = 0
+	</select>
+
+
+    <update id="updateCommission" parameterType="com.morning.star.retail.facade.dto.CategoryUpdateDTO">
+		update retail_category
+		set max_commission=#{maxCommission} ,min_commission=#{minCommission}
+		where parent_id like '${categoryId}%'
+	</update>
+
+    <select id="getUseAlways" resultType="com.morning.star.retail.facade.dto.CategoryDTO">
+		select category_id,COUNT(*) as num
+		from retail_category_log
+		where DATE_SUB(CURDATE(), INTERVAL 30 DAY) &lt;= date(create_time)
+		GROUP BY category_id
+		ORDER BY num desc
+		LIMIT 0,8
+	</select>
+</mapper>

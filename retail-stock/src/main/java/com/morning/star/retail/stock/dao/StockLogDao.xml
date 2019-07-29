@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.stock.dao.StockLogDao">
+	<insert id="insertStockLog" parameterType="com.morning.star.retail.stock.bean.StockLogDO">
+		insert into
+		retail_stock_log
+		(company_code,store_code,action,url,ip,type,create_time,operator_id,operator_name,remark)
+		values
+		(#{companyCode},#{storeCode},#{action},#{url},#{ip},#{type},#{createTime},#{operatorId},#{operatorName},#{remark})
+	</insert>
+
+	<select id="selectStockLogList" parameterType="com.morning.star.retail.stock.bo.StockLogBO"
+		resultType="com.morning.star.retail.stock.bean.StockLogDO">
+		select
+		id,company_code,store_code,action,url,ip,type,create_time,operator_id,operator_name,remark
+		from retail_stock_log
+		<where>
+			<if test="companyCode != null and companyCode !=''">
+				company_code = #{companyCode}
+			</if>
+			<if test="storeCode != null and storeCode != ''">
+				and store_code = #{storeCode}
+			</if>
+		</where>
+		order by createTime desc
+	</select>
+
+</mapper>

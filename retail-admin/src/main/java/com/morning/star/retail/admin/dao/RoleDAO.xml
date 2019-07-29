@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.star.retail.admin.dao.RoleDAO">
+
+    <sql id="Base_Column">
+    id, name, description, priority, classify, status, group_code, store_code, create_time, modify_time, operator_id, operator_name
+  </sql>
+
+    <sql id="Base_Where">
+        <where>
+            delete_flag = 0
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="ids != null and ids.size() > 0">
+                and id in
+                <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="name != null">
+                and name = #{name}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="groupCode != null and groupCode != ''">
+                and group_code = #{groupCode}
+            </if>
+            <if test="groupCodes != null and groupCodes.size() > 0">
+                and group_code in
+                <foreach collection="groupCodes" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="storeCode != null and storeCode != ''">
+                and store_code = #{storeCode}
+            </if>
+            <if test="storeCodes != null and storeCodes.size() > 0">
+                and store_code in
+                <foreach collection="storeCodes" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="classify != null and classify != ''">
+                and classify = #{classify}
+            </if>
+            <if test="notClassify != null and notClassify != ''">
+                and (classify != #{notClassify} or classify is null)
+            </if>
+        </where>
+    </sql>
+
+    <select id="select" resultType="com.morning.star.retail.admin.po.RolePO"
+            parameterType="com.morning.star.retail.admin.dto.RoleQueryDTO">
+        select
+        <include refid="Base_Column"/>
+        from access_role
+        <include refid="Base_Where"/>
+        order by id desc
+    </select>
+
+    <select id="selectRoleId" resultType="java.lang.Long"
+            parameterType="com.morning.star.retail.admin.dto.RoleQueryDTO">
+        select distinct id
+        from access_role
+        <include refid="Base_Where"/>
+    </select>
+
+    <select id="selectById" resultType="com.morning.star.retail.admin.po.RolePO" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column"/>
+        from access_role
+        where id = #{id} and delete_flag = 0
+    </select>
+
+    <select id="selectRole" resultType="java.lang.String" parameterType="java.lang.Long">
+        select distinct name
+        from access_role
+        where id in
+        <foreach collection="roleIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and delete_flag = 0
+    </select>
+
+    <select id="count" parameterType="com.morning.star.retail.admin.dto.RoleQueryDTO" resultType="java.lang.Integer">
+        select count(*)
+        from access_role
+        <include refid="Base_Where"/>
+    </select>
+
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:provider delay="-1" timeout="6000" retries="0"/>
+
+    <!-- 要暴露的服务接口 -->
+    <dubbo:service interface="com.morning.star.retail.admin.facade.StoreAccountFacade" ref="storeAccountFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.admin.facade.AccountFacade" ref="accountFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.admin.facade.SupplierAccountFacade" ref="supplierAccountFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+    <!-- resource -->
+    <dubbo:service interface="com.morning.star.retail.admin.facade.ResourceFacade" ref="resourceFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+    <!-- role -->
+    <dubbo:service interface="com.morning.star.retail.admin.facade.RoleFacade" ref="roleFacadeImpl"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.admin.remoteservice.ClerkShiftRemoteService"
+                   ref="clerkShiftRemoteService"
+                   group="${dubbo.group}" version="${dubbo.version}"/>
+
+
+    <!-- group -->
+    <dubbo:reference interface="com.morning.star.retail.facade.GroupFacade" id="groupFacade"
+                     group="${dubbo.group}" version="${dubbo.version}" timeout="30000" check="false"/>
+    <dubbo:reference interface="com.morning.star.retail.facade.StoreFacade" id="storeFacade"
+                     group="${dubbo.group}" version="${dubbo.version}" check="false"/>
+    <dubbo:reference interface="com.morning.star.retail.facade.SupplierFacade" id="supplierFacade"
+                     group="${dubbo.group}" version="${dubbo.version}" check="false"/>
+
+    <dubbo:reference interface="com.morning.star.retail.facade.DeviceFacade" id="deviceFacade"
+                     group="${dubbo.group}" version="${dubbo.version}" check="false"/>
+    <!--引入登陆绑定设备接口-->
+    <dubbo:reference interface="com.retail.push.msg.api.BindingEquipmentFacade"
+                     id="bindingEquipmentFacade" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"></dubbo:reference>
+</beans>
+
+
+
+
+
+
+
+

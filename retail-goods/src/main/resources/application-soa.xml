@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:provider delay="-1" timeout="6000" retries="0"/>
+
+    <!-- 要暴露的服务接口 -->
+    <dubbo:service interface="com.morning.star.retail.facade.ProductFacade"
+                   ref="productFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.GoodsAdminFacade"
+                   ref="goodsAdminFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.GoodsPosFacade"
+                   ref="goodsPosFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.CategoryFacade"
+                   ref="categoryFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.BrandFacade"
+                   ref="brandFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.UnitsFacade"
+                   ref="unitsFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.ProductPackFacade"
+                   ref="productPackFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.ImeiFacade"
+                   ref="imeiFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.ConsumableFacade"
+                   ref="consumableFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+
+    <dubbo:service interface="com.morning.star.retail.facade.GoodsSupplyFacade"
+                   ref="goodsSupplyFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <dubbo:service interface="com.morning.star.retail.facade.GoodsSupplySetFacade"
+                   ref="goodsSupplySetFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+    <!-- wms -->
+    <dubbo:service interface="com.morning.star.retail.facade.GoodsModelWmsFacade"
+                   ref="goodsModelWmsFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"/>
+
+
+    <!-- 要引用的服务 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.StoreFacade"
+                     id="storeFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="3000" check="false"></dubbo:reference>
+
+    <!-- 供应商 -->
+    <dubbo:reference interface="com.morning.star.retail.facade.SupplierFacade"
+                     id="supplierFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"/>
+
+    <!-- 柜组 -->
+    <!--<dubbo:reference interface="com.morning.star.retail.facade.ContainerFacade"-->
+    <!--id="containerFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"-->
+    <!--timeout="3000" check="false"></dubbo:reference>-->
+
+    <dubbo:reference interface="com.morning.star.retail.facade.CategoryWmsFacade"
+                     id="categoryWmsFacade" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"/>
+    <dubbo:reference interface="com.morning.star.retail.facade.MqErrorFacade"
+                     id="mqErrorFacade" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"/>
+
+
+    <!--地址-->
+    <dubbo:reference interface="com.morning.star.retail.facade.AddressFacade"
+                     id="addressFacadeImpl" group="${dubbo.group}" version="${dubbo.version}"
+                     timeout="30000" check="false"/>
+
+</beans>

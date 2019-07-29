@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.star.retail.admin.dao.RoleResourceDAO" >
+  <resultMap id="BaseResultMap" type="com.morning.star.retail.admin.po.RoleResourcePO" >
+    <id column="role_id" property="roleId" jdbcType="BIGINT" />
+    <id column="resource_id" property="resourceId" jdbcType="BIGINT" />
+  </resultMap>
+
+  <select id="select" resultMap="BaseResultMap" >
+    select role_id, resource_id 
+    from access_role_resource 
+    where role_id = #{roleId}
+  </select>
+
+  <select id="selectResourceId" resultType="java.lang.Long" >
+    select resource_id 
+    from access_role_resource 
+    where role_id = #{roleId} 
+    order by resource_id
+  </select>
+
+  <select id="selectRescId" resultType="java.lang.Long" >
+    select distinct resource_id 
+    from access_role_resource 
+    where role_id in 
+	<foreach collection="roleIds" index="index" item="item" open="(" separator="," close=")">
+		#{item}
+	</foreach>
+  </select>
+
+  <select id="selectOne" resultMap="BaseResultMap" >
+    select role_id, resource_id 
+    from access_role_resource 
+    where role_id = #{roleId} and resource_id = #{resourceId}
+  </select>
+
+  <insert id="insert" parameterType="com.morning.star.retail.admin.bean.RoleResourceDO" >
+    insert into access_role_resource (role_id, resource_id) values (#{roleId}, #{resourceId})
+  </insert>
+
+  <delete id="deleteByRoleId" parameterType="java.lang.Long" >
+    delete from access_role_resource where role_id = #{roleId}
+  </delete>
+
+  <delete id="deleteByResourceId" parameterType="java.lang.Long" >
+    delete from access_role_resource where resource_id = #{resourceId}
+  </delete>
+
+  <delete id="delete" >
+    delete from access_role_resource
+    where role_id in
+    <foreach collection="roleIds" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    and resource_id in
+    <foreach collection="resourceIds" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+</mapper>

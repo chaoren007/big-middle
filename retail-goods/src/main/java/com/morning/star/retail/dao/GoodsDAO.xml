@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.star.retail.dao.GoodsDAO">
+    <sql id="Base_Column_List">
+        goods_code, group_name, business_code, business_name, vcontainer_code, vcontainer_name,
+        store_code, store_name,
+        brand_id, brand_name,
+        category_id1, category_id2,
+        category_id3, category_id4, category_id5,
+        category_name1,
+        category_name2, category_name3, category_name4,
+        category_name5,
+        cost_price, delivery, sap_mother_code,
+        product_code, product_introduce, product_name,goods_name,
+        product_type,
+        group_code, guide_price, is_serial_code, origin_place,
+        pack_spec_num, pack_spec_units, priority, purchase_price, sales_type,
+        sap_product_code, shelf_life, spu_code, spu_info, standard_type,
+        status, supplier_code,
+        supplier_name, tax_rate, unit_product_code,
+        units_id, units_name, upc_code, weight,
+        sale_price, sale_status,
+        split_type, icon_path, commodity_type, mother_code, city_id, city_name, out_attr_info, category_spu_info
+    </sql>
+
+    <select id="query" resultType="com.morning.star.retail.facade.dto.GoodsDTO"
+            parameterType="com.morning.star.retail.facade.dto.GoodsQueryDTO">
+        select
+        <include refid="Base_Column_List"/>
+        from retail_goods
+        <where>
+            delete_flag = 0
+            <if test="storeCode != null and storeCode != ''">
+                and store_code = #{storeCode}
+            </if>
+            <if test="groupCode != null and groupCode != ''">
+                and group_code = #{groupCode}
+            </if>
+            <if test="categoryId1 != null">
+                and category_id1 = #{categoryId1}
+            </if>
+            <if test="categoryId2 != null">
+                and category_id2 = #{categoryId2}
+            </if>
+            <if test="categoryId3 != null">
+                and category_id3 = #{categoryId3}
+            </if>
+            <if test="brandId != null">
+                and brand_id = #{brandId}
+            </if>
+            <if test="supplierCode != null and supplierCode != ''">
+                and supplier_code = #{supplierCode}
+            </if>
+            <if test="commodityType != null">
+                and commodity_type = #{commodityType}
+            </if>
+            <if test="productCode != null and productCode != ''">
+                and product_code like '%${productCode}%'
+            </if>
+            <if test="upcCode != null">
+                and upc_code like '%${upcCode}%'
+            </if>
+            <if test="productName != null and productName != ''">
+                and product_name like '%${productName}%'
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                and supplier_name like '%${supplierName}%'
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="queryList" resultType="com.morning.star.retail.facade.dto.GoodsDTO"
+            parameterType="com.morning.star.retail.facade.dto.GoodsQueryDTO">
+        select
+        <include refid="Base_Column_List"/>
+        from retail_goods
+        <where>
+            delete_flag = 0
+            <if test="storeCode != null and storeCode != ''">
+                and store_code = #{storeCode}
+            </if>
+            <if test="groupCode != null and groupCode != ''">
+                and group_code = #{groupCode}
+            </if>
+            <if test="upcCode != null and upcCode != ''">
+                and (upc_code like ',%${upcCode}%,' or upc_code like '%${upcCode}%,' or upc_code like ',%${upcCode}%' or upc_code = #{upcCode} )
+            </if>
+            <if test="productName != null and productName != ''">
+                and product_name like '%${productName}%'
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="queryForCity" resultType="com.morning.star.retail.facade.dto.GoodsDTO"
+            parameterType="com.morning.star.retail.facade.dto.GoodsQueryDTO">
+        select
+        goods_code, group_name, business_code, business_name, vcontainer_code, vcontainer_name,
+        store_code, store_name,
+        brand_id, brand_name,
+        category_id1, category_id2,
+        category_id3, category_id4, category_id5,
+        category_name1,
+        category_name2, category_name3, category_name4,
+        category_name5,
+        cost_price, delivery, sap_mother_code,
+        product_code, product_introduce, product_name,goods_name,
+        product_type,
+        group_code, guide_price, is_serial_code, origin_place,
+        pack_spec_num, pack_spec_units, priority, purchase_price, sales_type,
+        sap_product_code, shelf_life, spu_code, spu_info, standard_type,
+        status, supplier_code,
+        supplier_name, tax_rate, unit_product_code,
+        units_id, units_name, upc_code, weight,
+        sale_price, sale_status,
+        split_type, icon_path, commodity_type, mother_code, city_id, city_name
+        from retail_goods
+        <where>
+            delete_flag = 0
+            <if test="groupCode != null and groupCode != ''">
+                and group_code = #{groupCode}
+            </if>
+            <if test="categoryId1 != null">
+                and category_id1 = #{categoryId1}
+            </if>
+            <if test="categoryId2 != null">
+                and category_id2 = #{categoryId2}
+            </if>
+            <if test="categoryId3 != null">
+                and category_id3 = #{categoryId3}
+            </if>
+            <if test="supplierCode != null and supplierCode != ''">
+                and supplier_code = #{supplierCode}
+            </if>
+            <if test="commodityType != null">
+                and commodity_type = #{commodityType}
+            </if>
+            <if test="productCode != null and productCode != ''">
+                and product_code = #{productCode}
+            </if>
+            <if test="upcCode != null">
+                and upc_code like '%${upcCode}%'
+            </if>
+            <if test="productName != null and productName != ''">
+                and product_name like '%${productName}%'
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                and supplier_name like '%${supplierName}%'
+            </if>
+        </where>
+        order by priority desc, create_time desc
+    </select>
+
+    <select id="queryPosSyncGoods" resultType="com.morning.star.retail.facade.dto.GoodsDTO"
+            parameterType="com.morning.star.retail.facade.dto.GoodsPosSyncQueryDTO">
+        select
+        goods_code, brand_id, brand_name,
+        category_id1, category_id2,
+        category_id3, category_id4, category_id5,
+        category_name1,
+        category_name2, category_name3, category_name4,
+        category_name5,
+        cost_price, delivery, product_code, product_introduce, product_name,
+        product_type,
+        group_code, guide_price, is_serial_code, origin_place,
+        pack_spec_num, pack_spec_units, priority, purchase_price, sales_type,
+        sap_product_code, shelf_life, spu_code, spu_info, standard_type,
+        status, supplier_code,
+        supplier_name, tax_rate, unit_product_code,
+        units_id, units_name, upc_code, weight,
+        sale_price, sale_status,
+        store_code,
+        split_type
+        from retail_goods
+        <where>
+            delete_flag = 0
+            <if test="storeCode != null">
+                and store_code = #{storeCode}
+            </if>
+            <if test="lastModifyTime != null">
+                and modify_time &gt; #{lastModifyTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryPosGoodsByUpc" resultType="com.morning.star.retail.facade.dto.GoodsDTO"
+            parameterType="com.morning.star.retail.facade.dto.GoodsPosSyncQueryDTO">
+        select goods_code, brand_id, brand_name,
+        category_id1, category_id2,
+        category_id3, category_id4, category_id5,
+        category_name1,
+        category_name2, category_name3, category_name4,
+        category_name5,
+        cost_price, delivery, product_code, product_introduce, product_name,goods_name,
+        product_type,
+        group_code, guide_price, is_serial_code, origin_place,
+        pack_spec_num, pack_spec_units, priority, purchase_price, sales_type,
+        sap_product_code, shelf_life, spu_code, spu_info, standard_type,
+        status, supplier_code,
+        supplier_name, tax_rate, unit_product_code,
+        units_id, units_name, upc_code, weight,
+        sale_price, sale_status,
+        store_code
+        from retail_goods
+        <where>
+            delete_flag = 0
+            <if test="storeCode != null">
+                and store_code = #{storeCode}
+            </if>
+            <if test="sapCodeList != null and sapCodeList.size() > 0">
+                and sap_product_code in
+                <foreach item="item" index="index" collection="sapCodeList"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="countCategory1" parameterType="com.morning.star.retail.facade.dto.CategoryCountDTO"
+            resultType="com.morning.star.retail.facade.dto.CategoryCountReDTO">
+        SELECT
+        count(*) as count,category_id1 as id, category_name1 as
+        categoryName
+        FROM
+        retail_goods
+        where category_id1 is not null
+        <if test="categoryId !=null ">
+            AND category_id1 =#{categoryId}
+        </if>
+        <if test="categoryName !=null and categoryName != '' ">
+            AND category_name1 =#{categoryName}
+        </if>
+        <if test="storeCode !=null and storeCode != '' ">
+            AND store_code =#{storeCode}
+        </if>
+        AND group_code=#{groupCode}
+        GROUP BY category_name1
+        ORDER BY count desc
+    </select>
+    <select id="countCategory2" parameterType="com.morning.star.retail.facade.dto.CategoryCountDTO"
+            resultType="com.morning.star.retail.facade.dto.CategoryCountReDTO">
+        SELECT
+        count(*) as count,category_id2 as id, category_name2 as
+        categoryName
+        FROM
+        retail_goods
+        where category_id2 is not null
+        <if test="categoryId !=null ">
+            AND category_id2 =#{categoryId}
+        </if>
+        <if test="categoryName !=null and categoryName != '' ">
+            AND category_name2 =#{categoryName}
+        </if>
+        <if test="storeCode !=null and storeCode != '' ">
+            AND store_code =#{storeCode}
+        </if>
+        AND group_code=#{groupCode}
+        GROUP BY category_name2
+        ORDER BY count desc
+    </select>
+    <select id="countCategory3" parameterType="com.morning.star.retail.facade.dto.CategoryCountDTO"
+            resultType="com.morning.star.retail.facade.dto.CategoryCountReDTO">
+        SELECT
+        count(*) as count,category_id3 as id, category_name3 as
+        categoryName
+        FROM
+        retail_goods
+        where category_id3 is not null
+        <if test="categoryId !=null ">
+            AND category_id3 =#{categoryId}
+        </if>
+        <if test="categoryName !=null and categoryName != '' ">
+            AND category_name3 =#{categoryName}
+        </if>
+        <if test="storeCode !=null and storeCode != '' ">
+            AND store_code =#{storeCode}
+        </if>
+        AND group_code=#{groupCode}
+        GROUP BY category_name3
+        ORDER BY count desc
+    </select>
+
+    <select id="countBrand" parameterType="com.morning.star.retail.facade.dto.BrandCountDTO"
+            resultType="com.morning.star.retail.facade.dto.BrandCountReDTO">
+        SELECT
+        count(*) as count, brand_name ,brand_id
+        FROM
+        retail_goods
+        where
+        brand_id is not null
+        <if test="brandName !=null ">
+            AND brand_name like CONCAT(CONCAT('%',#{brandName},'%'))
+        </if>
+        <if test="brandId !=null ">
+            AND brand_id =#{brandId}
+        </if>
+        <if test="storeCode !=null and storeCode != ''">
+            AND store_code =#{storeCode}
+        </if>
+        AND group_code=#{groupCode}
+        GROUP BY brand_id
+        ORDER BY count desc
+    </select>
+
+</mapper>
